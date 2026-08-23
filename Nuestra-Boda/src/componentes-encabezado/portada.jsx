@@ -321,7 +321,7 @@ export default function Portada() {
                 -left-12
                 -top-12
                 z-10
-                w-[160px]
+                w-[155px]
 
                 sm:w-[260px]
                 lg:w-[330px]
