@@ -1,55 +1,78 @@
 import { motion } from "framer-motion";
 
 /* =========================================
-   ITINERARIO CLÁSICO EDITORIAL
+   ITINERARIO CLÁSICO
+   SALVADOR & ANGELICA
+
+   DISEÑO:
+   - Fondo azul marino
+   - Textos blancos
+   - Detalles azul cielo
 ========================================= */
 
 const palette = {
-  ink: "#1D2733",
-  inkSoft: "#39434D",
-  paper: "#F5F1E8",
-  paperLight: "#FBF9F4",
-  paperDark: "#E5DED2",
-  antiqueGold: "#A48654",
-  antiqueGoldDark: "#725B37",
-  warmGray: "#777168",
+  royal: "#184EA6",
+  royalBright: "#205BBB",
+
+  navy: "#102A52",
+  navyDark: "#071A35",
+  navyLight: "#183B6B",
+
+  sky: "#9CCBF0",
+  skyLight: "#D9EBF8",
+
+  white: "#FFFFFF",
 };
+
+/* =========================================
+   EVENTOS
+========================================= */
 
 const events = [
   {
     time: "18:00",
     title: "Ceremonia",
-    description: "Ceremonia civil con nuestros seres queridos.",
+    description:
+      "Ceremonia civil con nuestros seres queridos.",
     icon: "rings",
   },
   {
     time: "19:30",
     title: "Recepción",
-    description: "Bienvenida con cóctel y música en vivo.",
+    description:
+      "Bienvenida con cóctel y música en vivo.",
     icon: "glass",
   },
   {
     time: "21:00",
     title: "Cena",
-    description: "Banquete con un menú especialmente diseñado.",
+    description:
+      "Banquete con un menú especialmente diseñado.",
     icon: "dinner",
   },
   {
     time: "23:00",
     title: "Fiesta",
-    description: "Una noche para bailar y celebrar juntos.",
+    description:
+      "Una noche para bailar y celebrar juntos.",
     icon: "music",
   },
 ];
+
+/* =========================================
+   ANIMACIÓN
+========================================= */
 
 const fadeUp = {
   hidden: {
     opacity: 0,
     y: 24,
   },
+
   show: {
     opacity: 1,
     y: 0,
+
     transition: {
       duration: 0.9,
       ease: [0.22, 1, 0.36, 1],
@@ -66,7 +89,7 @@ function EventIcon({ type }) {
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: "1.25",
+    strokeWidth: "1.35",
     strokeLinecap: "round",
     strokeLinejoin: "round",
     className: "h-5 w-5 sm:h-6 sm:w-6",
@@ -116,115 +139,6 @@ function EventIcon({ type }) {
 }
 
 /* =========================================
-   ORNAMENTO DE ESQUINA
-========================================= */
-
-function CornerOrnament({ className = "" }) {
-  return (
-    <svg
-      viewBox="0 0 90 90"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-    >
-      <path
-        d="M5 85V30C5 16.2 16.2 5 30 5h55"
-        stroke="currentColor"
-        strokeWidth="1"
-      />
-
-      <path
-        d="M15 72V34c0-10.5 8.5-19 19-19h38"
-        stroke="currentColor"
-        strokeWidth="0.65"
-      />
-
-      <path
-        d="M30 5C30 18.8 18.8 30 5 30"
-        stroke="currentColor"
-        strokeWidth="0.75"
-      />
-
-      <circle cx="15" cy="15" r="2" fill="currentColor" />
-    </svg>
-  );
-}
-
-/* =========================================
-   RAMA BOTÁNICA
-========================================= */
-
-function BotanicalBranch({ className = "" }) {
-  return (
-    <svg
-      viewBox="0 0 150 260"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-    >
-      <path
-        d="M76 252C80 192 78 130 71 12"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="M76 205C54 192 41 174 35 151"
-        stroke="currentColor"
-        strokeWidth="0.8"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="M75 167C97 153 109 133 113 109"
-        stroke="currentColor"
-        strokeWidth="0.8"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="M73 123C53 110 43 93 39 72"
-        stroke="currentColor"
-        strokeWidth="0.8"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="M72 83C91 71 101 53 103 34"
-        stroke="currentColor"
-        strokeWidth="0.8"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="M35 151C49 150 60 158 67 173C52 172 41 165 35 151Z"
-        stroke="currentColor"
-        strokeWidth="0.7"
-      />
-
-      <path
-        d="M113 109C99 109 88 117 80 132C96 131 107 123 113 109Z"
-        stroke="currentColor"
-        strokeWidth="0.7"
-      />
-
-      <path
-        d="M39 72C53 73 63 81 69 95C54 94 44 86 39 72Z"
-        stroke="currentColor"
-        strokeWidth="0.7"
-      />
-
-      <path
-        d="M103 34C90 35 80 42 74 55C88 54 98 47 103 34Z"
-        stroke="currentColor"
-        strokeWidth="0.7"
-      />
-    </svg>
-  );
-}
-
-/* =========================================
    SEPARADOR
 ========================================= */
 
@@ -235,14 +149,20 @@ function DecorativeDivider() {
         className="h-px w-10 sm:w-16"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(164,134,84,0.72))",
+            "linear-gradient(to right, transparent, rgba(255,255,255,0.65))",
         }}
       />
 
       <span
-        className="h-[5px] w-[5px] rotate-45 border"
+        className="
+          h-[5px]
+          w-[5px]
+          rotate-45
+          border
+        "
         style={{
-          borderColor: "rgba(164,134,84,0.72)",
+          borderColor: palette.sky,
+          backgroundColor: palette.navy,
         }}
       />
 
@@ -250,7 +170,7 @@ function DecorativeDivider() {
         className="h-px w-10 sm:w-16"
         style={{
           background:
-            "linear-gradient(to left, transparent, rgba(164,134,84,0.72))",
+            "linear-gradient(to left, transparent, rgba(255,255,255,0.65))",
         }}
       />
     </div>
@@ -258,17 +178,130 @@ function DecorativeDivider() {
 }
 
 /* =========================================
-   EVENTO DE LA CRONOLOGÍA
+   CONTENIDO DE EVENTO
 ========================================= */
 
-function TimelineEvent({ event, index, isLast }) {
-  const isEven = index % 2 === 0;
+function EventContent({
+  event,
+  index,
+  alignment = "left",
+}) {
+  const right = alignment === "right";
+
+  return (
+    <div
+      className={`
+        w-full
+        max-w-md
+        ${right ? "lg:ml-auto" : "lg:mr-auto"}
+      `}
+    >
+      <p
+        className="
+          text-[8px]
+          uppercase
+          tracking-[0.32em]
+          text-white/60
+
+          sm:text-[9px]
+        "
+      >
+        Momento {String(index + 1).padStart(2, "0")}
+      </p>
+
+      <div
+        className={`
+          mt-2
+          flex
+          flex-col
+          gap-1.5
+
+          sm:flex-row
+          sm:items-baseline
+          sm:gap-3
+
+          ${
+            right
+              ? "lg:flex-row-reverse lg:justify-start"
+              : "lg:justify-start"
+          }
+        `}
+      >
+        <p
+          className="
+            font-serif
+            text-[31px]
+            leading-none
+            text-white
+
+            sm:text-[36px]
+          "
+        >
+          {event.time}
+        </p>
+
+        <span
+          className="
+            hidden
+            h-px
+            w-8
+
+            sm:block
+          "
+          style={{
+            backgroundColor:
+              "rgba(156,203,240,0.85)",
+          }}
+        />
+
+        <h3
+          className="
+            font-serif
+            text-[23px]
+            font-normal
+            text-white
+
+            sm:text-[26px]
+          "
+        >
+          {event.title}
+        </h3>
+      </div>
+
+      <p
+        className="
+          mt-3
+          font-serif
+          text-[13px]
+          leading-6
+          text-white/70
+
+          sm:text-[14px]
+          sm:leading-7
+        "
+      >
+        {event.description}
+      </p>
+    </div>
+  );
+}
+
+/* =========================================
+   EVENTO DE LA LÍNEA DE TIEMPO
+========================================= */
+
+function TimelineEvent({
+  event,
+  index,
+  isLast,
+}) {
+  const even = index % 2 === 0;
 
   return (
     <motion.article
       initial={{
         opacity: 0,
-        y: 22,
+        y: 20,
       }}
       whileInView={{
         opacity: 1,
@@ -279,52 +312,67 @@ function TimelineEvent({ event, index, isLast }) {
         amount: 0.25,
       }}
       transition={{
-        duration: 0.85,
+        duration: 0.8,
         delay: index * 0.1,
         ease: [0.22, 1, 0.36, 1],
       }}
       className="
         relative
         grid
-        grid-cols-[44px_1fr]
+        grid-cols-[46px_1fr]
         gap-5
+
         sm:grid-cols-[58px_1fr]
         sm:gap-7
-        lg:grid-cols-[1fr_80px_1fr]
+
+        lg:grid-cols-[1fr_76px_1fr]
         lg:gap-10
       "
     >
-      {/* LÍNEA VERTICAL EN MÓVIL */}
+      {/* =====================================
+          LÍNEA MÓVIL
+      ===================================== */}
 
       {!isLast && (
         <div
           className="
             absolute
-            left-[21px]
+            left-[22px]
             top-11
-            h-[calc(100%+28px)]
+            h-[calc(100%+30px)]
             w-px
+
             sm:left-[28px]
+
             lg:hidden
           "
           style={{
-            backgroundColor: "rgba(164,134,84,0.32)",
+            background:
+              "linear-gradient(to bottom, rgba(255,255,255,0.52), rgba(156,203,240,0.40))",
           }}
         />
       )}
 
-      {/* CONTENIDO IZQUIERDO EN COMPUTADORA */}
+      {/* =====================================
+          CONTENIDO IZQUIERDO DESKTOP
+      ===================================== */}
 
       <div
         className={`
           hidden
+
           lg:flex
           lg:flex-col
           lg:justify-center
-          ${isEven ? "lg:items-end lg:text-right" : "lg:invisible"}
+
+          ${
+            even
+              ? "lg:items-end lg:text-right"
+              : "lg:invisible"
+          }
         `}
       >
-        {isEven && (
+        {even && (
           <EventContent
             event={event}
             index={index}
@@ -333,7 +381,9 @@ function TimelineEvent({ event, index, isLast }) {
         )}
       </div>
 
-      {/* MARCADOR CENTRAL */}
+      {/* =====================================
+          MARCADOR CENTRAL
+      ===================================== */}
 
       <div
         className="
@@ -343,6 +393,7 @@ function TimelineEvent({ event, index, isLast }) {
           row-start-1
           flex
           justify-center
+
           lg:col-start-2
         "
       >
@@ -355,14 +406,19 @@ function TimelineEvent({ event, index, isLast }) {
             justify-center
             rounded-full
             border
-            bg-[#FBF9F4]
+            bg-white/5
+
             sm:h-14
             sm:w-14
           "
           style={{
-            borderColor: "rgba(164,134,84,0.55)",
-            color: palette.antiqueGoldDark,
-            boxShadow: "0 7px 20px rgba(29,39,51,0.08)",
+            borderColor:
+              "rgba(156,203,240,0.78)",
+
+            color: palette.white,
+
+            boxShadow:
+              "0 8px 22px rgba(0,0,0,0.14)",
           }}
         >
           <EventIcon type={event.icon} />
@@ -375,30 +431,41 @@ function TimelineEvent({ event, index, isLast }) {
               absolute
               top-14
               hidden
-              h-[calc(100%+50px)]
+              h-[calc(100%+52px)]
               w-px
+
               lg:block
             "
             style={{
-              backgroundColor: "rgba(164,134,84,0.32)",
+              background:
+                "linear-gradient(to bottom, rgba(255,255,255,0.52), rgba(156,203,240,0.38))",
             }}
           />
         )}
       </div>
 
-      {/* CONTENIDO MÓVIL Y DERECHO EN COMPUTADORA */}
+      {/* =====================================
+          DERECHO / MÓVIL
+      ===================================== */}
 
       <div
         className={`
           col-start-2
           row-start-1
           pb-11
+
           sm:pb-14
+
           lg:col-start-3
           lg:flex
           lg:flex-col
           lg:justify-center
-          ${isEven ? "lg:invisible" : "lg:items-start lg:text-left"}
+
+          ${
+            even
+              ? "lg:invisible"
+              : "lg:items-start lg:text-left"
+          }
         `}
       >
         <div className="lg:hidden">
@@ -409,7 +476,7 @@ function TimelineEvent({ event, index, isLast }) {
           />
         </div>
 
-        {!isEven && (
+        {!even && (
           <div className="hidden lg:block">
             <EventContent
               event={event}
@@ -420,111 +487,6 @@ function TimelineEvent({ event, index, isLast }) {
         )}
       </div>
     </motion.article>
-  );
-}
-
-/* =========================================
-   CONTENIDO DE CADA EVENTO
-========================================= */
-
-function EventContent({ event, index, alignment }) {
-  const isRight = alignment === "right";
-
-  return (
-    <div
-      className={`
-        w-full
-        max-w-md
-        ${isRight ? "lg:ml-auto" : "lg:mr-auto"}
-      `}
-    >
-      <p
-        className="
-          text-[8px]
-          uppercase
-          tracking-[0.34em]
-          sm:text-[9px]
-        "
-        style={{
-          color: palette.antiqueGoldDark,
-        }}
-      >
-        Momento {String(index + 1).padStart(2, "0")}
-      </p>
-
-      <div
-        className={`
-          mt-3
-          flex
-          flex-col
-          gap-2
-          sm:flex-row
-          sm:items-baseline
-          sm:gap-4
-          ${
-            isRight
-              ? "sm:justify-start lg:flex-row-reverse lg:justify-start"
-              : "sm:justify-start"
-          }
-        `}
-      >
-        <p
-          className="
-            font-serif
-            text-[33px]
-            leading-none
-            tracking-[-0.025em]
-            sm:text-[39px]
-          "
-          style={{
-            color: palette.ink,
-          }}
-        >
-          {event.time}
-        </p>
-
-        <span
-          className="
-            hidden
-            h-px
-            w-8
-            sm:block
-          "
-          style={{
-            backgroundColor: "rgba(164,134,84,0.55)",
-          }}
-        />
-
-        <h3
-          className="
-            font-serif
-            text-[24px]
-            font-normal
-            sm:text-[28px]
-          "
-          style={{
-            color: palette.inkSoft,
-          }}
-        >
-          {event.title}
-        </h3>
-      </div>
-
-      <p
-        className="
-          mt-4
-          font-serif
-          text-[14px]
-          leading-7
-          sm:text-[15px]
-        "
-        style={{
-          color: palette.warmGray,
-        }}
-      >
-        {event.description}
-      </p>
-    </div>
   );
 }
 
@@ -547,175 +509,115 @@ export default function ItinerarioRelojCentral() {
         w-full
         overflow-hidden
         px-5
-        py-24
+        py-20
+
         sm:px-8
-        sm:py-28
+        sm:py-24
+
         lg:px-12
-        lg:py-32
+        lg:py-28
       "
       style={{
         background: `
           linear-gradient(
             180deg,
-            ${palette.paperLight} 0%,
-            ${palette.paper} 56%,
-            ${palette.paperDark} 100%
+            ${palette.navy} 0%,
+            ${palette.navyDark} 100%
           )
         `,
       }}
     >
-      {/* TEXTURA DE PAPEL */}
+      {/* =====================================
+          LUZ SUPERIOR
+      ===================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
-          inset-0
-          opacity-[0.16]
+          left-1/2
+          top-[-240px]
+          h-[480px]
+          w-[480px]
+          -translate-x-1/2
+          rounded-full
+          blur-3xl
+
+          sm:h-[620px]
+          sm:w-[620px]
         "
         style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              0deg,
-              rgba(29,39,51,0.025) 0px,
-              rgba(29,39,51,0.025) 1px,
-              transparent 1px,
-              transparent 5px
-            )
-          `,
+          background:
+            "radial-gradient(circle, rgba(156,203,240,0.15) 0%, transparent 70%)",
         }}
       />
 
-      {/* MARCO GENERAL */}
+      {/* =====================================
+          LUZ IZQUIERDA
+      ===================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
-          inset-5
-          border
-          sm:inset-8
-          lg:inset-10
+          -left-36
+          top-24
+          h-[320px]
+          w-[320px]
+          rounded-full
+          blur-3xl
         "
         style={{
-          borderColor: "rgba(164,134,84,0.25)",
+          background:
+            "radial-gradient(circle, rgba(32,91,187,0.14) 0%, transparent 72%)",
         }}
       />
+
+      {/* =====================================
+          LUZ DERECHA
+      ===================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
-          inset-[26px]
-          border
-          sm:inset-[38px]
-          lg:inset-[46px]
+          -right-40
+          bottom-20
+          h-[380px]
+          w-[380px]
+          rounded-full
+          blur-3xl
         "
         style={{
-          borderColor: "rgba(164,134,84,0.1)",
+          background:
+            "radial-gradient(circle, rgba(156,203,240,0.10) 0%, transparent 72%)",
         }}
       />
 
-      {/* ORNAMENTOS */}
+      {/* =====================================
+          LÍNEA SUPERIOR
+      ===================================== */}
 
-      <CornerOrnament
+      <div
         className="
           pointer-events-none
           absolute
-          left-6
-          top-6
-          h-16
-          w-16
-          text-[#A48654]/25
-          sm:left-9
-          sm:top-9
-          sm:h-20
-          sm:w-20
+          left-[8%]
+          right-[8%]
+          top-5
+          h-px
+
+          sm:top-8
         "
+        style={{
+          background:
+            "linear-gradient(to right, transparent, rgba(255,255,255,0.20), transparent)",
+        }}
       />
 
-      <CornerOrnament
-        className="
-          pointer-events-none
-          absolute
-          right-6
-          top-6
-          h-16
-          w-16
-          rotate-90
-          text-[#A48654]/25
-          sm:right-9
-          sm:top-9
-          sm:h-20
-          sm:w-20
-        "
-      />
-
-      <CornerOrnament
-        className="
-          pointer-events-none
-          absolute
-          bottom-6
-          left-6
-          h-16
-          w-16
-          -rotate-90
-          text-[#A48654]/25
-          sm:bottom-9
-          sm:left-9
-          sm:h-20
-          sm:w-20
-        "
-      />
-
-      <CornerOrnament
-        className="
-          pointer-events-none
-          absolute
-          bottom-6
-          right-6
-          h-16
-          w-16
-          rotate-180
-          text-[#A48654]/25
-          sm:bottom-9
-          sm:right-9
-          sm:h-20
-          sm:w-20
-        "
-      />
-
-      <BotanicalBranch
-        className="
-          pointer-events-none
-          absolute
-          -bottom-16
-          -left-8
-          h-[250px]
-          w-[145px]
-          -rotate-12
-          text-[#A48654]/10
-          sm:h-[310px]
-          sm:w-[180px]
-          lg:left-2
-        "
-      />
-
-      <BotanicalBranch
-        className="
-          pointer-events-none
-          absolute
-          -right-8
-          -top-16
-          h-[250px]
-          w-[145px]
-          rotate-[168deg]
-          text-[#A48654]/10
-          sm:h-[310px]
-          sm:w-[180px]
-          lg:right-2
-        "
-      />
+      {/* =====================================
+          CONTENIDO
+      ===================================== */}
 
       <div
         className="
@@ -726,19 +628,23 @@ export default function ItinerarioRelojCentral() {
           max-w-6xl
         "
       >
-        {/* ENCABEZADO */}
+        {/* =====================================
+            ENCABEZADO
+        ===================================== */}
 
         <motion.div
           className="
             mx-auto
-            mb-16
+            mb-14
             flex
             max-w-3xl
             flex-col
             items-center
             text-center
-            sm:mb-20
-            lg:mb-24
+
+            sm:mb-16
+
+            lg:mb-20
           "
           initial={{
             opacity: 0,
@@ -748,7 +654,9 @@ export default function ItinerarioRelojCentral() {
             opacity: 1,
             y: 0,
           }}
-          viewport={{ once: true }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.9,
             ease: [0.22, 1, 0.36, 1],
@@ -758,13 +666,12 @@ export default function ItinerarioRelojCentral() {
             className="
               text-[8px]
               uppercase
-              tracking-[0.44em]
+              tracking-[0.42em]
+              text-white/65
+
               sm:text-[10px]
-              sm:tracking-[0.55em]
+              sm:tracking-[0.5em]
             "
-            style={{
-              color: palette.antiqueGoldDark,
-            }}
           >
             Itinerario
           </p>
@@ -775,18 +682,17 @@ export default function ItinerarioRelojCentral() {
 
           <h2
             className="
-              mt-7
+              mt-6
               font-serif
-              text-[40px]
+              text-[38px]
               font-normal
               leading-tight
-              tracking-[-0.025em]
-              sm:text-[54px]
-              md:text-[64px]
+              text-white
+
+              sm:text-[52px]
+
+              md:text-[60px]
             "
-            style={{
-              color: palette.ink,
-            }}
           >
             El orden de nuestro día
           </h2>
@@ -794,51 +700,56 @@ export default function ItinerarioRelojCentral() {
           <p
             className="
               mx-auto
-              mt-5
+              mt-4
               max-w-2xl
               font-serif
-              text-[14px]
+              text-[13px]
               italic
-              leading-7
-              sm:text-base
+              leading-6
+              text-white
+
+              sm:text-[15px]
+              sm:leading-7
             "
-            style={{
-              color: palette.warmGray,
-            }}
           >
-            Cada momento ha sido pensado para compartir, celebrar y guardar
-            juntos un recuerdo inolvidable.
+            Cada momento ha sido pensado para
+            compartir, celebrar y guardar juntos un
+            recuerdo inolvidable.
           </p>
         </motion.div>
 
-        {/* FECHA CENTRAL */}
+        {/* =====================================
+            FECHA
+        ===================================== */}
 
         <motion.div
           className="
             mx-auto
             mb-14
-            flex
             max-w-sm
-            flex-col
-            items-center
             border-y
             px-5
-            py-7
+            py-6
             text-center
+
             sm:mb-16
+            sm:py-7
           "
           style={{
-            borderColor: "rgba(164,134,84,0.34)",
+            borderColor:
+              "rgba(255,255,255,0.25)",
           }}
           initial={{
             opacity: 0,
-            y: 16,
+            y: 14,
           }}
           whileInView={{
             opacity: 1,
             y: 0,
           }}
-          viewport={{ once: true }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.9,
             delay: 0.1,
@@ -848,12 +759,11 @@ export default function ItinerarioRelojCentral() {
             className="
               text-[8px]
               uppercase
-              tracking-[0.38em]
+              tracking-[0.36em]
+              text-white/60
+
               sm:text-[9px]
             "
-            style={{
-              color: palette.antiqueGoldDark,
-            }}
           >
             Nuestra celebración
           </p>
@@ -864,13 +774,12 @@ export default function ItinerarioRelojCentral() {
               font-serif
               text-[42px]
               leading-none
+              text-white
+
               sm:text-[48px]
             "
-            style={{
-              color: palette.ink,
-            }}
           >
-            11
+            17
           </p>
 
           <p
@@ -879,17 +788,18 @@ export default function ItinerarioRelojCentral() {
               text-[9px]
               uppercase
               tracking-[0.4em]
+              text-white/75
+
               sm:text-[10px]
             "
-            style={{
-              color: palette.warmGray,
-            }}
           >
-            Junio
+            Octubre
           </p>
         </motion.div>
 
-        {/* CRONOLOGÍA */}
+        {/* =====================================
+            CRONOLOGÍA
+        ===================================== */}
 
         <div className="mx-auto max-w-5xl">
           {events.map((event, index) => (
@@ -897,12 +807,16 @@ export default function ItinerarioRelojCentral() {
               key={`${event.time}-${event.title}`}
               event={event}
               index={index}
-              isLast={index === events.length - 1}
+              isLast={
+                index === events.length - 1
+              }
             />
           ))}
         </div>
 
-        {/* CIERRE */}
+        {/* =====================================
+            CIERRE
+        ===================================== */}
 
         <motion.div
           className="
@@ -913,7 +827,9 @@ export default function ItinerarioRelojCentral() {
             flex-col
             items-center
             text-center
+
             sm:mt-14
+
             lg:mt-16
           "
           initial={{
@@ -924,7 +840,9 @@ export default function ItinerarioRelojCentral() {
             opacity: 1,
             y: 0,
           }}
-          viewport={{ once: true }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.9,
             delay: 0.25,
@@ -936,14 +854,13 @@ export default function ItinerarioRelojCentral() {
             className="
               mt-6
               font-serif
-              text-[14px]
+              text-[13px]
               italic
               leading-7
-              sm:text-base
+              text-white
+
+              sm:text-[15px]
             "
-            style={{
-              color: palette.warmGray,
-            }}
           >
             Esperamos vivir cada momento contigo.
           </p>

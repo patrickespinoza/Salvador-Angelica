@@ -8,7 +8,6 @@ import FrasePremium from "./componentes-encabezado/FrasePrincipal";
 import EventoDireccion from "./componentes-encabezado/Ubicacion";
 import DressCodePremium from "./componentes-encabezado/codigovestimenta";
 import Galeria from "./componentes-encabezado/Galeria";
-import FraseModal from "./componentes-encabezado/Fraseintermedia";
 import Album from "./componentes-encabezado/albun";
 
 
@@ -54,8 +53,6 @@ export default function PaginaPrincipal() {
 <Galeria/>
 
 <ItinerarioRelojCentral/>
-  
-<FraseModal/> 
 
 <DressCodePremium/>
 

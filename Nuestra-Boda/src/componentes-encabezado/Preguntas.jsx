@@ -10,16 +10,37 @@ import html2canvas from "html2canvas";
 const API_URL =
   "https://script.google.com/macros/s/AKfycbxQTHIUXU3wWSw_mg7wvwbjwLbzskGcgGaGKzuY_yUK1r-RfPfXtSB7WD4CfZ6W7f5QJg/exec";
 
+/* =========================================
+   PALETA
+   SALVADOR & ANGELICA
+
+   Fondo principal: Azul Rey
+   Texto principal: Blanco
+   Detalles: Azul Cielo
+========================================= */
+
 const palette = {
-  ink: "#1D2733",
-  inkSoft: "#39434D",
-  paper: "#F5F1E8",
-  paperLight: "#FBF9F4",
-  paperDark: "#E5DED2",
-  antiqueGold: "#A48654",
-  antiqueGoldDark: "#725B37",
-  warmGray: "#777168",
+  royal: "#184EA6",
+  royalBright: "#205BBB",
+  royalDark: "#123E86",
+
+  navy: "#102A52",
+  navyDark: "#071A35",
+
+  sky: "#9CCBF0",
+  skyLight: "#D9EBF8",
+
+  white: "#FFFFFF",
+  softWhite: "#F8FBFF",
+
+  textDark: "#111827",
+  textSoft: "#374151",
+  gray: "#6B7280",
 };
+
+/* =========================================
+   PREGUNTAS
+========================================= */
 
 const preguntas = [
   {
@@ -35,34 +56,64 @@ const preguntas = [
   },
   {
     pregunta: "¿Quién dijo “te amo” primero?",
-    opciones: ["Valeria", "Alejandro", "Ambos", "Nadie", "Fue un accidente"],
+    opciones: [
+      "Valeria",
+      "Alejandro",
+      "Ambos",
+      "Nadie",
+      "Fue un accidente",
+    ],
     correcta: 1,
   },
   {
     pregunta: "¿Cuál es su comida favorita?",
-    opciones: ["Pizza", "Sushi", "Tacos", "Pasta", "Hamburguesas"],
+    opciones: [
+      "Pizza",
+      "Sushi",
+      "Tacos",
+      "Pasta",
+      "Hamburguesas",
+    ],
     correcta: 2,
   },
   {
     pregunta: "¿Dónde fue su primera cita?",
-    opciones: ["Cine", "Restaurante", "Parque", "Café", "Playa"],
+    opciones: [
+      "Cine",
+      "Restaurante",
+      "Parque",
+      "Café",
+      "Playa",
+    ],
     correcta: 3,
   },
   {
     pregunta: "¿Quién es más puntual?",
-    opciones: ["Valeria", "Alejandro", "Ambos", "Ninguno", "Depende del día"],
+    opciones: [
+      "Valeria",
+      "Alejandro",
+      "Ambos",
+      "Ninguno",
+      "Depende del día",
+    ],
     correcta: 0,
   },
 ];
+
+/* =========================================
+   ANIMACIÓN GENERAL
+========================================= */
 
 const fadeUp = {
   hidden: {
     opacity: 0,
     y: 24,
   },
+
   show: {
     opacity: 1,
     y: 0,
+
     transition: {
       duration: 0.9,
       ease: [0.22, 1, 0.36, 1],
@@ -100,7 +151,12 @@ function CornerOrnament({ className = "" }) {
         strokeWidth="0.75"
       />
 
-      <circle cx="15" cy="15" r="2" fill="currentColor" />
+      <circle
+        cx="15"
+        cy="15"
+        r="2"
+        fill="currentColor"
+      />
     </svg>
   );
 }
@@ -175,29 +231,52 @@ function BotanicalBranch({ className = "" }) {
   );
 }
 
-function DecorativeDivider({ compact = false }) {
+/* =========================================
+   SEPARADOR
+========================================= */
+
+function DecorativeDivider({ compact = false, dark = false }) {
+  const lineColor = dark
+    ? "rgba(24,78,166,0.55)"
+    : "rgba(255,255,255,0.65)";
+
+  const diamondColor = dark
+    ? palette.royal
+    : palette.sky;
+
   return (
     <div className="flex items-center justify-center gap-3">
       <span
-        className={compact ? "h-px w-8 sm:w-12" : "h-px w-10 sm:w-16"}
+        className={
+          compact
+            ? "h-px w-8 sm:w-12"
+            : "h-px w-10 sm:w-16"
+        }
         style={{
-          background:
-            "linear-gradient(to right, transparent, rgba(164,134,84,0.72))",
+          background: `linear-gradient(to right, transparent, ${lineColor})`,
         }}
       />
 
       <span
-        className="h-[5px] w-[5px] rotate-45 border"
+        className="
+          h-[5px]
+          w-[5px]
+          rotate-45
+          border
+        "
         style={{
-          borderColor: "rgba(164,134,84,0.72)",
+          borderColor: diamondColor,
         }}
       />
 
       <span
-        className={compact ? "h-px w-8 sm:w-12" : "h-px w-10 sm:w-16"}
+        className={
+          compact
+            ? "h-px w-8 sm:w-12"
+            : "h-px w-10 sm:w-16"
+        }
         style={{
-          background:
-            "linear-gradient(to left, transparent, rgba(164,134,84,0.72))",
+          background: `linear-gradient(to left, transparent, ${lineColor})`,
         }}
       />
     </div>
@@ -272,7 +351,10 @@ function DownloadIcon() {
    PODIO
 ========================================= */
 
-function PodiumPlace({ participant, place }) {
+function PodiumPlace({
+  participant,
+  place,
+}) {
   if (!participant) return null;
 
   const placeStyles = {
@@ -281,11 +363,13 @@ function PodiumPlace({ participant, place }) {
       number: "01",
       label: "Primer lugar",
     },
+
     2: {
       height: "h-20 sm:h-28",
       number: "02",
       label: "Segundo lugar",
     },
+
     3: {
       height: "h-16 sm:h-24",
       number: "03",
@@ -325,10 +409,11 @@ function PodiumPlace({ participant, place }) {
           truncate
           font-serif
           text-[13px]
+
           sm:text-base
         "
         style={{
-          color: palette.ink,
+          color: palette.textDark,
         }}
       >
         {participant.nombre}
@@ -342,7 +427,7 @@ function PodiumPlace({ participant, place }) {
           tracking-[0.22em]
         "
         style={{
-          color: palette.warmGray,
+          color: palette.gray,
         }}
       >
         {participant.score} aciertos
@@ -362,22 +447,27 @@ function PodiumPlace({ participant, place }) {
         style={{
           background:
             place === 1
-              ? "linear-gradient(180deg, #E6DDCE, #D7CAB5)"
-              : "linear-gradient(180deg, #F5F1E8, #E5DED2)",
+              ? `linear-gradient(180deg, ${palette.skyLight}, ${palette.sky})`
+              : `linear-gradient(180deg, ${palette.softWhite}, ${palette.skyLight})`,
+
           borderColor:
             place === 1
-              ? "rgba(164,134,84,0.55)"
-              : "rgba(164,134,84,0.3)",
+              ? "rgba(24,78,166,0.55)"
+              : "rgba(24,78,166,0.25)",
         }}
       >
         <span
           className="
             font-serif
             text-2xl
+
             sm:text-3xl
           "
           style={{
-            color: place === 1 ? palette.antiqueGoldDark : palette.inkSoft,
+            color:
+              place === 1
+                ? palette.royal
+                : palette.navy,
           }}
         >
           {current.number}
@@ -390,10 +480,11 @@ function PodiumPlace({ participant, place }) {
           text-[7px]
           uppercase
           tracking-[0.2em]
+
           sm:text-[8px]
         "
         style={{
-          color: palette.antiqueGoldDark,
+          color: palette.royal,
         }}
       >
         {current.label}
@@ -408,26 +499,36 @@ function PodiumPlace({ participant, place }) {
 
 const Preguntas = () => {
   const [nombre, setNombre] = useState("");
-  const [mostrarNombre, setMostrarNombre] = useState(true);
+  const [mostrarNombre, setMostrarNombre] =
+    useState(true);
 
   const [paso, setPaso] = useState(0);
-  const [seleccion, setSeleccion] = useState(null);
-  const [bloqueado, setBloqueado] = useState(false);
+  const [seleccion, setSeleccion] =
+    useState(null);
+  const [bloqueado, setBloqueado] =
+    useState(false);
 
   const [score, setScore] = useState(0);
-  const [finalScore, setFinalScore] = useState(0);
-  const [terminado, setTerminado] = useState(false);
+  const [finalScore, setFinalScore] =
+    useState(0);
+  const [terminado, setTerminado] =
+    useState(false);
 
   const [ranking, setRanking] = useState([]);
-  const [cargandoRanking, setCargandoRanking] = useState(false);
+  const [cargandoRanking, setCargandoRanking] =
+    useState(false);
 
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [guardandoImagen, setGuardandoImagen] = useState(false);
+  const [showConfetti, setShowConfetti] =
+    useState(false);
 
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-  });
+  const [guardandoImagen, setGuardandoImagen] =
+    useState(false);
+
+  const [windowSize, setWindowSize] =
+    useState({
+      width: 0,
+      height: 0,
+    });
 
   const resultadoRef = useRef(null);
 
@@ -445,10 +546,16 @@ const Preguntas = () => {
 
     updateWindowSize();
 
-    window.addEventListener("resize", updateWindowSize);
+    window.addEventListener(
+      "resize",
+      updateWindowSize
+    );
 
     return () => {
-      window.removeEventListener("resize", updateWindowSize);
+      window.removeEventListener(
+        "resize",
+        updateWindowSize
+      );
     };
   }, []);
 
@@ -456,18 +563,24 @@ const Preguntas = () => {
      ENVIAR RESULTADO
   ========================================= */
 
-  const enviarResultado = async (scoreToSend) => {
+  const enviarResultado = async (
+    scoreToSend
+  ) => {
     try {
       await fetch(API_URL, {
         method: "POST",
         mode: "no-cors",
+
         body: JSON.stringify({
           nombre: nombre.trim(),
           score: scoreToSend,
         }),
       });
     } catch (error) {
-      console.error("Error enviando el resultado:", error);
+      console.error(
+        "Error enviando el resultado:",
+        error
+      );
     }
   };
 
@@ -479,27 +592,40 @@ const Preguntas = () => {
     setCargandoRanking(true);
 
     try {
-      const response = await fetch(API_URL);
+      const response =
+        await fetch(API_URL);
 
       if (!response.ok) {
-        throw new Error("No fue posible obtener el ranking.");
+        throw new Error(
+          "No fue posible obtener el ranking."
+        );
       }
 
       const data = await response.json();
 
-      const normalizedData = Array.isArray(data) ? data : [];
+      const normalizedData =
+        Array.isArray(data) ? data : [];
 
-      const sortedRanking = normalizedData
-        .map((participant) => ({
-          ...participant,
-          score: Number(participant.score) || 0,
-        }))
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 3);
+      const sortedRanking =
+        normalizedData
+          .map((participant) => ({
+            ...participant,
+            score:
+              Number(participant.score) || 0,
+          }))
+          .sort(
+            (a, b) =>
+              b.score - a.score
+          )
+          .slice(0, 3);
 
       setRanking(sortedRanking);
     } catch (error) {
-      console.error("Error obteniendo el ranking:", error);
+      console.error(
+        "Error obteniendo el ranking:",
+        error
+      );
+
       setRanking([]);
     } finally {
       setCargandoRanking(false);
@@ -521,20 +647,27 @@ const Preguntas = () => {
 
       setShowConfetti(true);
 
-      rankingTimeout = window.setTimeout(() => {
-        obtenerRanking();
-      }, 1400);
+      rankingTimeout =
+        window.setTimeout(() => {
+          obtenerRanking();
+        }, 1400);
 
-      confettiTimeout = window.setTimeout(() => {
-        setShowConfetti(false);
-      }, 6000);
+      confettiTimeout =
+        window.setTimeout(() => {
+          setShowConfetti(false);
+        }, 6000);
     };
 
     completeQuiz();
 
     return () => {
-      window.clearTimeout(rankingTimeout);
-      window.clearTimeout(confettiTimeout);
+      window.clearTimeout(
+        rankingTimeout
+      );
+
+      window.clearTimeout(
+        confettiTimeout
+      );
     };
   }, [terminado, finalScore]);
 
@@ -542,19 +675,31 @@ const Preguntas = () => {
      RESPONDER
   ========================================= */
 
-  const manejarRespuesta = (optionIndex) => {
+  const manejarRespuesta = (
+    optionIndex
+  ) => {
     if (bloqueado) return;
 
-    if (mostrarNombre && !nombre.trim()) {
-      window.alert("Escribe tu nombre para comenzar.");
+    if (
+      mostrarNombre &&
+      !nombre.trim()
+    ) {
+      window.alert(
+        "Escribe tu nombre para comenzar."
+      );
+
       return;
     }
 
     setBloqueado(true);
     setSeleccion(optionIndex);
 
-    const isCorrect = optionIndex === preguntas[paso].correcta;
-    const nextScore = isCorrect ? score + 1 : score;
+    const isCorrect =
+      optionIndex ===
+      preguntas[paso].correcta;
+
+    const nextScore =
+      isCorrect ? score + 1 : score;
 
     if (isCorrect) {
       setScore(nextScore);
@@ -567,8 +712,15 @@ const Preguntas = () => {
         setMostrarNombre(false);
       }
 
-      if (paso + 1 < preguntas.length) {
-        setPaso((previousStep) => previousStep + 1);
+      if (
+        paso + 1 <
+        preguntas.length
+      ) {
+        setPaso(
+          (previousStep) =>
+            previousStep + 1
+        );
+
         setBloqueado(false);
       } else {
         setFinalScore(nextScore);
@@ -583,34 +735,57 @@ const Preguntas = () => {
   ========================================= */
 
   const guardarResultado = async () => {
-    if (!resultadoRef.current || guardandoImagen) return;
+    if (
+      !resultadoRef.current ||
+      guardandoImagen
+    ) {
+      return;
+    }
 
     setGuardandoImagen(true);
 
     try {
-      const canvas = await html2canvas(resultadoRef.current, {
-        scale: 2,
-        backgroundColor: palette.paperLight,
-        useCORS: true,
-      });
+      const canvas =
+        await html2canvas(
+          resultadoRef.current,
+          {
+            scale: 2,
 
-      const link = document.createElement("a");
+            backgroundColor:
+              palette.softWhite,
+
+            useCORS: true,
+          }
+        );
+
+      const link =
+        document.createElement("a");
 
       link.download = `resultado-${nombre
         .trim()
         .toLowerCase()
         .replace(/\s+/g, "-")}.png`;
 
-      link.href = canvas.toDataURL("image/png");
+      link.href =
+        canvas.toDataURL(
+          "image/png"
+        );
+
       link.click();
     } catch (error) {
-      console.error("No se pudo guardar el resultado:", error);
+      console.error(
+        "No se pudo guardar el resultado:",
+        error
+      );
     } finally {
       setGuardandoImagen(false);
     }
   };
 
-  const progress = ((paso + 1) / preguntas.length) * 100;
+  const progress =
+    ((paso + 1) /
+      preguntas.length) *
+    100;
 
   return (
     <motion.section
@@ -631,8 +806,10 @@ const Preguntas = () => {
         overflow-hidden
         px-5
         py-24
+
         sm:px-8
         sm:py-28
+
         lg:px-12
         lg:py-32
       "
@@ -640,40 +817,47 @@ const Preguntas = () => {
         background: `
           linear-gradient(
             180deg,
-            ${palette.paperLight} 0%,
-            ${palette.paper} 56%,
-            ${palette.paperDark} 100%
+            ${palette.royalBright} 0%,
+            ${palette.royal} 52%,
+            ${palette.royalDark} 100%
           )
         `,
       }}
     >
       {/* CONFETI */}
 
-      {showConfetti && windowSize.width > 0 && (
-        <Confetti
-          width={windowSize.width}
-          height={windowSize.height}
-          numberOfPieces={220}
-          recycle={false}
-          gravity={0.12}
-        />
-      )}
+      {showConfetti &&
+        windowSize.width > 0 && (
+          <Confetti
+            width={
+              windowSize.width
+            }
+            height={
+              windowSize.height
+            }
+            numberOfPieces={220}
+            recycle={false}
+            gravity={0.12}
+          />
+        )}
 
-      {/* TEXTURA */}
+      {/* =====================================
+          TEXTURA
+      ===================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          opacity-[0.16]
+          opacity-[0.18]
         "
         style={{
           backgroundImage: `
             repeating-linear-gradient(
               0deg,
-              rgba(29,39,51,0.025) 0px,
-              rgba(29,39,51,0.025) 1px,
+              rgba(255,255,255,0.035) 0px,
+              rgba(255,255,255,0.035) 1px,
               transparent 1px,
               transparent 5px
             )
@@ -681,7 +865,34 @@ const Preguntas = () => {
         }}
       />
 
-      {/* MARCOS */}
+      {/* =====================================
+          LUZ SUPERIOR
+      ===================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[-260px]
+          h-[520px]
+          w-[520px]
+          -translate-x-1/2
+          rounded-full
+          blur-3xl
+
+          sm:h-[700px]
+          sm:w-[700px]
+        "
+        style={{
+          background:
+            "radial-gradient(circle, rgba(156,203,240,0.22) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* =====================================
+          MARCOS
+      ===================================== */}
 
       <div
         className="
@@ -689,11 +900,14 @@ const Preguntas = () => {
           absolute
           inset-5
           border
+
           sm:inset-8
+
           lg:inset-10
         "
         style={{
-          borderColor: "rgba(164,134,84,0.25)",
+          borderColor:
+            "rgba(255,255,255,0.25)",
         }}
       />
 
@@ -703,15 +917,20 @@ const Preguntas = () => {
           absolute
           inset-[26px]
           border
+
           sm:inset-[38px]
+
           lg:inset-[46px]
         "
         style={{
-          borderColor: "rgba(164,134,84,0.1)",
+          borderColor:
+            "rgba(255,255,255,0.10)",
         }}
       />
 
-      {/* ESQUINAS */}
+      {/* =====================================
+          ESQUINAS
+      ===================================== */}
 
       <CornerOrnament
         className="
@@ -721,7 +940,8 @@ const Preguntas = () => {
           top-6
           h-16
           w-16
-          text-[#A48654]/25
+          text-white/25
+
           sm:left-9
           sm:top-9
           sm:h-20
@@ -738,7 +958,8 @@ const Preguntas = () => {
           h-16
           w-16
           rotate-90
-          text-[#A48654]/25
+          text-white/25
+
           sm:right-9
           sm:top-9
           sm:h-20
@@ -755,7 +976,8 @@ const Preguntas = () => {
           h-16
           w-16
           -rotate-90
-          text-[#A48654]/25
+          text-white/25
+
           sm:bottom-9
           sm:left-9
           sm:h-20
@@ -772,7 +994,8 @@ const Preguntas = () => {
           h-16
           w-16
           rotate-180
-          text-[#A48654]/25
+          text-white/25
+
           sm:bottom-9
           sm:right-9
           sm:h-20
@@ -780,7 +1003,9 @@ const Preguntas = () => {
         "
       />
 
-      {/* BOTÁNICOS */}
+      {/* =====================================
+          BOTÁNICOS
+      ===================================== */}
 
       <BotanicalBranch
         className="
@@ -791,9 +1016,11 @@ const Preguntas = () => {
           h-[250px]
           w-[145px]
           -rotate-12
-          text-[#A48654]/10
+          text-white/10
+
           sm:h-[310px]
           sm:w-[180px]
+
           lg:left-2
         "
       />
@@ -807,14 +1034,18 @@ const Preguntas = () => {
           h-[250px]
           w-[145px]
           rotate-[168deg]
-          text-[#A48654]/10
+          text-white/10
+
           sm:h-[310px]
           sm:w-[180px]
+
           lg:right-2
         "
       />
 
-      {/* CONTENIDO */}
+      {/* =====================================
+          CONTENIDO
+      ===================================== */}
 
       <div
         className="
@@ -825,7 +1056,9 @@ const Preguntas = () => {
           max-w-5xl
         "
       >
-        {/* ENCABEZADO */}
+        {/* =====================================
+            ENCABEZADO
+        ===================================== */}
 
         <motion.div
           className="
@@ -836,6 +1069,7 @@ const Preguntas = () => {
             flex-col
             items-center
             text-center
+
             sm:mb-16
           "
           initial={{
@@ -846,7 +1080,9 @@ const Preguntas = () => {
             opacity: 1,
             y: 0,
           }}
-          viewport={{ once: true }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.9,
           }}
@@ -862,11 +1098,18 @@ const Preguntas = () => {
               border
             "
             style={{
-              color: palette.antiqueGoldDark,
-              borderColor: "rgba(164,134,84,0.42)",
+              color:
+                palette.white,
+
+              borderColor:
+                "rgba(255,255,255,0.45)",
             }}
           >
-            {terminado ? <TrophyIcon /> : <QuestionIcon />}
+            {terminado ? (
+              <TrophyIcon />
+            ) : (
+              <QuestionIcon />
+            )}
           </div>
 
           <p
@@ -875,12 +1118,11 @@ const Preguntas = () => {
               text-[8px]
               uppercase
               tracking-[0.44em]
+              text-white/70
+
               sm:text-[10px]
               sm:tracking-[0.55em]
             "
-            style={{
-              color: palette.antiqueGoldDark,
-            }}
           >
             Un detalle para compartir
           </p>
@@ -897,12 +1139,12 @@ const Preguntas = () => {
               font-normal
               leading-tight
               tracking-[-0.025em]
+              text-white
+
               sm:text-[54px]
+
               md:text-[64px]
             "
-            style={{
-              color: palette.ink,
-            }}
           >
             ¿Cuánto nos conoces?
           </h2>
@@ -916,18 +1158,20 @@ const Preguntas = () => {
               text-[14px]
               italic
               leading-7
+              text-white/75
+
               sm:text-base
             "
-            style={{
-              color: palette.warmGray,
-            }}
           >
-            Pon a prueba cuánto conoces nuestra historia y descubre tu lugar
-            entre nuestros invitados.
+            Pon a prueba cuánto conoces nuestra
+            historia y descubre tu lugar entre
+            nuestros invitados.
           </p>
         </motion.div>
 
-        {/* JUEGO */}
+        {/* =====================================
+            JUEGO
+        ===================================== */}
 
         <div
           className="
@@ -938,9 +1182,14 @@ const Preguntas = () => {
             border
           "
           style={{
-            backgroundColor: "rgba(251,249,244,0.82)",
-            borderColor: "rgba(164,134,84,0.34)",
-            boxShadow: "0 24px 65px rgba(29,39,51,0.08)",
+            backgroundColor:
+              "rgba(255,255,255,0.97)",
+
+            borderColor:
+              "rgba(255,255,255,0.65)",
+
+            boxShadow:
+              "0 28px 75px rgba(7,26,53,0.28)",
           }}
         >
           <div
@@ -951,7 +1200,8 @@ const Preguntas = () => {
               border
             "
             style={{
-              borderColor: "rgba(164,134,84,0.12)",
+              borderColor:
+                "rgba(24,78,166,0.15)",
             }}
           />
 
@@ -969,8 +1219,10 @@ const Preguntas = () => {
                   px-6
                   py-12
                   text-center
+
                   sm:px-10
                   sm:py-14
+
                   md:px-14
                 "
                 initial={{
@@ -987,25 +1239,45 @@ const Preguntas = () => {
                 }}
                 transition={{
                   duration: 0.45,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [
+                    0.22,
+                    1,
+                    0.36,
+                    1,
+                  ],
                 }}
               >
                 {/* PROGRESO */}
 
                 <div className="w-full">
-                  <div className="flex items-center justify-between gap-4">
+                  <div
+                    className="
+                      flex
+                      items-center
+                      justify-between
+                      gap-4
+                    "
+                  >
                     <p
                       className="
                         text-[8px]
                         uppercase
                         tracking-[0.28em]
+
                         sm:text-[9px]
                       "
                       style={{
-                        color: palette.antiqueGoldDark,
+                        color:
+                          palette.royal,
                       }}
                     >
-                      Pregunta {String(paso + 1).padStart(2, "0")}
+                      Pregunta{" "}
+                      {String(
+                        paso + 1
+                      ).padStart(
+                        2,
+                        "0"
+                      )}
                     </p>
 
                     <p
@@ -1013,13 +1285,21 @@ const Preguntas = () => {
                         text-[8px]
                         uppercase
                         tracking-[0.22em]
+
                         sm:text-[9px]
                       "
                       style={{
-                        color: palette.warmGray,
+                        color:
+                          palette.gray,
                       }}
                     >
-                      De {String(preguntas.length).padStart(2, "0")}
+                      De{" "}
+                      {String(
+                        preguntas.length
+                      ).padStart(
+                        2,
+                        "0"
+                      )}
                     </p>
                   </div>
 
@@ -1031,20 +1311,27 @@ const Preguntas = () => {
                       overflow-hidden
                     "
                     style={{
-                      backgroundColor: "rgba(164,134,84,0.18)",
+                      backgroundColor:
+                        "rgba(24,78,166,0.16)",
                     }}
                   >
                     <motion.div
                       className="h-full"
                       style={{
-                        backgroundColor: palette.antiqueGold,
+                        backgroundColor:
+                          palette.royal,
                       }}
                       animate={{
                         width: `${progress}%`,
                       }}
                       transition={{
                         duration: 0.65,
-                        ease: [0.22, 1, 0.36, 1],
+                        ease: [
+                          0.22,
+                          1,
+                          0.36,
+                          1,
+                        ],
                       }}
                     />
                   </div>
@@ -1079,10 +1366,12 @@ const Preguntas = () => {
                           text-[8px]
                           uppercase
                           tracking-[0.34em]
+
                           sm:text-[9px]
                         "
                         style={{
-                          color: palette.warmGray,
+                          color:
+                            palette.gray,
                         }}
                       >
                         Escribe tu nombre
@@ -1092,14 +1381,22 @@ const Preguntas = () => {
                         id="quiz-name"
                         type="text"
                         value={nombre}
-                        onChange={(event) => setNombre(event.target.value)}
+                        onChange={(
+                          event
+                        ) =>
+                          setNombre(
+                            event
+                              .target
+                              .value
+                          )
+                        }
                         placeholder="Tu nombre"
                         autoComplete="name"
                         className="
                           mt-4
                           w-full
                           border
-                          bg-[#FBF9F4]
+                          bg-white
                           px-5
                           py-4
                           text-center
@@ -1107,19 +1404,27 @@ const Preguntas = () => {
                           text-base
                           outline-none
                           transition
+
                           sm:text-lg
                         "
                         style={{
-                          color: palette.ink,
-                          borderColor: "rgba(164,134,84,0.34)",
+                          color:
+                            palette.textDark,
+
+                          borderColor:
+                            "rgba(24,78,166,0.30)",
                         }}
-                        onFocus={(event) => {
+                        onFocus={(
+                          event
+                        ) => {
                           event.currentTarget.style.borderColor =
-                            palette.antiqueGold;
+                            palette.royal;
                         }}
-                        onBlur={(event) => {
+                        onBlur={(
+                          event
+                        ) => {
                           event.currentTarget.style.borderColor =
-                            "rgba(164,134,84,0.34)";
+                            "rgba(24,78,166,0.30)";
                         }}
                       />
                     </motion.div>
@@ -1127,7 +1432,10 @@ const Preguntas = () => {
                 </AnimatePresence>
 
                 <div className="my-9">
-                  <DecorativeDivider compact />
+                  <DecorativeDivider
+                    compact
+                    dark
+                  />
                 </div>
 
                 {/* PREGUNTA */}
@@ -1140,13 +1448,18 @@ const Preguntas = () => {
                     font-normal
                     leading-[1.45]
                     tracking-[-0.015em]
+
                     sm:text-[34px]
                   "
                   style={{
-                    color: palette.ink,
+                    color:
+                      palette.textDark,
                   }}
                 >
-                  {preguntas[paso].pregunta}
+                  {
+                    preguntas[paso]
+                      .pregunta
+                  }
                 </h3>
 
                 {/* RESPUESTAS */}
@@ -1158,84 +1471,117 @@ const Preguntas = () => {
                     w-full
                     max-w-xl
                     gap-3
+
                     sm:grid-cols-2
                   "
                 >
-                  {preguntas[paso].opciones.map((opcion, optionIndex) => {
-                    const isSelected = seleccion === optionIndex;
+                  {preguntas[
+                    paso
+                  ].opciones.map(
+                    (
+                      opcion,
+                      optionIndex
+                    ) => {
+                      const isSelected =
+                        seleccion ===
+                        optionIndex;
 
-                    return (
-                      <motion.button
-                        key={`${paso}-${opcion}`}
-                        type="button"
-                        onClick={() => manejarRespuesta(optionIndex)}
-                        disabled={bloqueado}
-                        className="
-                          relative
-                          min-h-[58px]
-                          border
-                          px-5
-                          py-4
-                          text-left
-                          disabled:cursor-not-allowed
-                        "
-                        style={{
-                          backgroundColor: isSelected
-                            ? palette.ink
-                            : palette.paperLight,
-                          borderColor: isSelected
-                            ? palette.ink
-                            : "rgba(164,134,84,0.3)",
-                          color: isSelected
-                            ? palette.paperLight
-                            : palette.inkSoft,
-                        }}
-                        whileHover={
-                          bloqueado
-                            ? undefined
-                            : {
-                                y: -2,
-                                borderColor: palette.antiqueGold,
-                              }
-                        }
-                        whileTap={
-                          bloqueado
-                            ? undefined
-                            : {
-                                scale: 0.985,
-                              }
-                        }
-                      >
-                        <span
+                      return (
+                        <motion.button
+                          key={`${paso}-${opcion}`}
+                          type="button"
+                          onClick={() =>
+                            manejarRespuesta(
+                              optionIndex
+                            )
+                          }
+                          disabled={
+                            bloqueado
+                          }
                           className="
-                            mr-3
-                            font-serif
-                            text-xs
+                            relative
+                            min-h-[58px]
+                            border
+                            px-5
+                            py-4
+                            text-left
+                            disabled:cursor-not-allowed
                           "
                           style={{
-                            color: isSelected
-                              ? "rgba(251,249,244,0.68)"
-                              : palette.antiqueGoldDark,
-                          }}
-                        >
-                          {String.fromCharCode(65 + optionIndex)}.
-                        </span>
+                            backgroundColor:
+                              isSelected
+                                ? palette.royal
+                                : palette.softWhite,
 
-                        <span
-                          className="
-                            font-serif
-                            text-[14px]
-                            sm:text-[15px]
-                          "
+                            borderColor:
+                              isSelected
+                                ? palette.royal
+                                : "rgba(24,78,166,0.24)",
+
+                            color:
+                              isSelected
+                                ? palette.white
+                                : palette.textSoft,
+                          }}
+                          whileHover={
+                            bloqueado
+                              ? undefined
+                              : {
+                                  y: -2,
+                                  borderColor:
+                                    palette.royal,
+                                }
+                          }
+                          whileTap={
+                            bloqueado
+                              ? undefined
+                              : {
+                                  scale:
+                                    0.985,
+                                }
+                          }
                         >
-                          {opcion}
-                        </span>
-                      </motion.button>
-                    );
-                  })}
+                          <span
+                            className="
+                              mr-3
+                              font-serif
+                              text-xs
+                            "
+                            style={{
+                              color:
+                                isSelected
+                                  ? "rgba(255,255,255,0.68)"
+                                  : palette.royal,
+                            }}
+                          >
+                            {String.fromCharCode(
+                              65 +
+                                optionIndex
+                            )}
+                            .
+                          </span>
+
+                          <span
+                            className="
+                              font-serif
+                              text-[14px]
+
+                              sm:text-[15px]
+                            "
+                          >
+                            {opcion}
+                          </span>
+                        </motion.button>
+                      );
+                    }
+                  )}
                 </div>
               </motion.div>
             ) : (
+              /* =================================
+                 RESULTADO
+              ================================= */
+
               <motion.div
                 key="quiz-result"
                 ref={resultadoRef}
@@ -1249,12 +1595,15 @@ const Preguntas = () => {
                   px-5
                   py-12
                   text-center
+
                   sm:px-10
                   sm:py-14
+
                   md:px-14
                 "
                 style={{
-                  backgroundColor: palette.paperLight,
+                  backgroundColor:
+                    palette.softWhite,
                 }}
                 initial={{
                   opacity: 0,
@@ -1266,7 +1615,12 @@ const Preguntas = () => {
                 }}
                 transition={{
                   duration: 0.65,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [
+                    0.22,
+                    1,
+                    0.36,
+                    1,
+                  ],
                 }}
               >
                 <div
@@ -1280,8 +1634,11 @@ const Preguntas = () => {
                     border
                   "
                   style={{
-                    color: palette.antiqueGoldDark,
-                    borderColor: "rgba(164,134,84,0.42)",
+                    color:
+                      palette.royal,
+
+                    borderColor:
+                      "rgba(24,78,166,0.38)",
                   }}
                 >
                   <TrophyIcon />
@@ -1293,17 +1650,21 @@ const Preguntas = () => {
                     text-[8px]
                     uppercase
                     tracking-[0.4em]
+
                     sm:text-[9px]
                   "
                   style={{
-                    color: palette.antiqueGoldDark,
+                    color:
+                      palette.royal,
                   }}
                 >
                   Resultado final
                 </p>
 
                 <div className="mt-5">
-                  <DecorativeDivider />
+                  <DecorativeDivider
+                    dark
+                  />
                 </div>
 
                 <h3
@@ -1313,13 +1674,16 @@ const Preguntas = () => {
                     text-[34px]
                     font-normal
                     leading-tight
+
                     sm:text-[43px]
                   "
                   style={{
-                    color: palette.ink,
+                    color:
+                      palette.textDark,
                   }}
                 >
-                  {nombre.trim()}, acertaste
+                  {nombre.trim()},
+                  acertaste
                 </h3>
 
                 <p
@@ -1329,10 +1693,12 @@ const Preguntas = () => {
                     text-[72px]
                     leading-none
                     tracking-[-0.06em]
+
                     sm:text-[92px]
                   "
                   style={{
-                    color: palette.ink,
+                    color:
+                      palette.royal,
                   }}
                 >
                   {finalScore}
@@ -1344,14 +1710,19 @@ const Preguntas = () => {
                     text-[9px]
                     uppercase
                     tracking-[0.34em]
+
                     sm:text-[10px]
                   "
                   style={{
-                    color: palette.warmGray,
+                    color:
+                      palette.gray,
                   }}
                 >
-                  De {preguntas.length} preguntas
+                  De {preguntas.length}{" "}
+                  preguntas
                 </p>
+
+                {/* RANKING */}
 
                 <div
                   className="
@@ -1363,7 +1734,8 @@ const Preguntas = () => {
                     pt-9
                   "
                   style={{
-                    borderColor: "rgba(164,134,84,0.3)",
+                    borderColor:
+                      "rgba(24,78,166,0.22)",
                   }}
                 >
                   <p
@@ -1371,13 +1743,16 @@ const Preguntas = () => {
                       text-[8px]
                       uppercase
                       tracking-[0.36em]
+
                       sm:text-[9px]
                     "
                     style={{
-                      color: palette.antiqueGoldDark,
+                      color:
+                        palette.royal,
                     }}
                   >
-                    Los invitados que mejor nos conocen
+                    Los invitados que
+                    mejor nos conocen
                   </p>
 
                   {cargandoRanking ? (
@@ -1389,12 +1764,15 @@ const Preguntas = () => {
                         italic
                       "
                       style={{
-                        color: palette.warmGray,
+                        color:
+                          palette.gray,
                       }}
                     >
-                      Actualizando resultados…
+                      Actualizando
+                      resultados…
                     </p>
-                  ) : ranking.length > 0 ? (
+                  ) : ranking.length >
+                    0 ? (
                     <div
                       className="
                         mt-9
@@ -1402,12 +1780,30 @@ const Preguntas = () => {
                         items-end
                         justify-center
                         gap-3
+
                         sm:gap-5
                       "
                     >
-                      <PodiumPlace participant={ranking[1]} place={2} />
-                      <PodiumPlace participant={ranking[0]} place={1} />
-                      <PodiumPlace participant={ranking[2]} place={3} />
+                      <PodiumPlace
+                        participant={
+                          ranking[1]
+                        }
+                        place={2}
+                      />
+
+                      <PodiumPlace
+                        participant={
+                          ranking[0]
+                        }
+                        place={1}
+                      />
+
+                      <PodiumPlace
+                        participant={
+                          ranking[2]
+                        }
+                        place={3}
+                      />
                     </div>
                   ) : (
                     <p
@@ -1419,19 +1815,28 @@ const Preguntas = () => {
                         leading-7
                       "
                       style={{
-                        color: palette.warmGray,
+                        color:
+                          palette.gray,
                       }}
                     >
-                      El ranking estará disponible cuando se registren los
-                      primeros resultados.
+                      El ranking estará
+                      disponible cuando se
+                      registren los primeros
+                      resultados.
                     </p>
                   )}
                 </div>
 
+                {/* BOTÓN GUARDAR */}
+
                 <motion.button
                   type="button"
-                  onClick={guardarResultado}
-                  disabled={guardandoImagen}
+                  onClick={
+                    guardarResultado
+                  }
+                  disabled={
+                    guardandoImagen
+                  }
                   className="
                     mt-11
                     inline-flex
@@ -1444,26 +1849,35 @@ const Preguntas = () => {
                     py-4
                     disabled:cursor-not-allowed
                     disabled:opacity-60
+
                     sm:min-w-[260px]
                   "
                   style={{
-                    backgroundColor: palette.ink,
-                    borderColor: palette.ink,
-                    color: palette.paperLight,
+                    backgroundColor:
+                      palette.royal,
+
+                    borderColor:
+                      palette.royal,
+
+                    color:
+                      palette.white,
                   }}
                   whileHover={
                     guardandoImagen
                       ? undefined
                       : {
                           y: -2,
-                          backgroundColor: palette.inkSoft,
+
+                          backgroundColor:
+                            palette.royalDark,
                         }
                   }
                   whileTap={
                     guardandoImagen
                       ? undefined
                       : {
-                          scale: 0.985,
+                          scale:
+                            0.985,
                         }
                   }
                 >
@@ -1474,6 +1888,7 @@ const Preguntas = () => {
                       text-[9px]
                       uppercase
                       tracking-[0.28em]
+
                       sm:text-[10px]
                     "
                   >
@@ -1487,6 +1902,10 @@ const Preguntas = () => {
           </AnimatePresence>
         </div>
 
+        {/* =====================================
+            FRASE FINAL
+        ===================================== */}
+
         <motion.p
           className="
             mx-auto
@@ -1497,12 +1916,11 @@ const Preguntas = () => {
             text-[14px]
             italic
             leading-7
+            text-white/75
+
             sm:mt-12
             sm:text-base
           "
-          style={{
-            color: palette.warmGray,
-          }}
           initial={{
             opacity: 0,
             y: 10,
@@ -1511,14 +1929,17 @@ const Preguntas = () => {
             opacity: 1,
             y: 0,
           }}
-          viewport={{ once: true }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.85,
             delay: 0.25,
           }}
         >
-          Gracias por formar parte de nuestra historia y compartir este momento
-          con nosotros.
+          Gracias por formar parte de nuestra
+          historia y compartir este momento con
+          nosotros.
         </motion.p>
       </div>
     </motion.section>
