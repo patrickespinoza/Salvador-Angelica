@@ -428,10 +428,14 @@ export default function Portada() {
                   flex-col
                   items-center
 
+                  translate-y-7
+                  sm:translate-y-6
+
                   lg:w-[42%]
                   lg:flex-none
                   lg:self-center
                   lg:px-4
+                  lg:translate-y-0
                 "
                 initial={{
                   opacity: 0,
@@ -1529,6 +1533,129 @@ export default function Portada() {
           }}
         >
 
+          {/* NOMBRES */}
+
+          <motion.div
+            className="
+              mt-1
+              flex
+              max-w-4xl
+              flex-col
+              items-center
+
+              sm:mt-2
+            "
+            initial={{
+              opacity: 0,
+              y: 24,
+            }}
+            animate={
+              mostrarContenido
+                ? {
+                    opacity: 1,
+                    y: 0,
+                  }
+                : {
+                    opacity: 0,
+                    y: 24,
+                  }
+            }
+            transition={{
+              duration: 1.1,
+              delay: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <h1
+              className="
+                font-cursiveDancing
+                text-[40px]
+                leading-[0.9]
+                text-white
+
+                sm:text-[70px]
+                md:text-[84px]
+                lg:text-[46px]
+              "
+              style={{
+                textShadow:
+                  "0 4px 24px rgba(0,0,0,0.34)",
+              }}
+            >
+              Salvador
+            </h1>
+
+            <div
+              className="
+                my-2
+                flex
+                items-center
+                gap-3
+
+                sm:my-4
+                sm:gap-6
+              "
+            >
+              <span
+                className="
+                  h-px
+                  w-12
+
+                  sm:w-20
+                "
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, rgba(169,214,245,0.9))",
+                }}
+              />
+
+              <span
+                className="
+                  font-cursiveDancing
+                  text-2xl
+
+                  sm:text-4xl
+                "
+                style={{
+                  color: palette.sky,
+                }}
+              >
+                &
+              </span>
+
+              <span
+                className="
+                  h-px
+                  w-12
+
+                  sm:w-20
+                "
+                style={{
+                  background:
+                    "linear-gradient(to left, transparent, rgba(169,214,245,0.9))",
+                }}
+              />
+            </div>
+
+            <h1
+              className="
+                font-cursiveDancing
+                text-[40px]
+                leading-[0.9]
+                text-white
+
+                sm:text-[70px]
+                md:text-[84px]
+                lg:text-[44px]
+              "
+              style={{
+                textShadow:
+                  "0 4px 24px rgba(0,0,0,0.34)",
+              }}
+            >
+              Angélica
+            </h1>
+          </motion.div>
 
           {/* ===================================
               CONTADOR
