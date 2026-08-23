@@ -398,6 +398,8 @@ export default function Portada() {
 
                 sm:max-w-[720px]
                 sm:px-8
+                translate-y-3
+                sm:translate-y-4
 
                 lg:max-w-[1280px]
                 lg:flex-row
@@ -406,9 +408,11 @@ export default function Portada() {
                 lg:gap-10
                 lg:px-12
                 lg:py-8
+                lg:translate-y-8
 
-                xl:gap-20
+                xl:gap-16
                 xl:px-16
+                xl:translate-y-10
               "
             >
               {/* =================================
@@ -449,8 +453,9 @@ export default function Portada() {
                     leading-[1.7]
                     tracking-[0.22em]
 
-                    sm:text-[12px]
-                    sm:tracking-[0.3em]
+                    sm:text-[11px]
+                    sm:leading-[1.55]
+                    sm:tracking-[0.28em]
 
                   "
                   style={{
@@ -462,14 +467,14 @@ export default function Portada() {
                   a nuestra boda
                 </p>
 
-                <div className="mt-1 sm:mt-2">
+                <div className="mt-0.5 sm:mt-1">
                   <h1
                     className="
                       font-cursiveDancing
                       text-[31px]
                       leading-[0.95]
 
-                      sm:text-[46px]
+                      sm:text-[43px]
                     "
                     style={{
                       color: palette.navy,
@@ -500,7 +505,7 @@ export default function Portada() {
                       text-[31px]
                       leading-[0.95]
 
-                      sm:text-[46px]
+                      sm:text-[43px]
                     "
                     style={{
                       color: palette.navy,
@@ -518,14 +523,14 @@ export default function Portada() {
                 <div>
                   <p
                     className="
-                      mt-3
+                      mt-2
                       font-serif
-                      text-[15px]
+                      text-[14px]
                       uppercase
                       tracking-[0.2em]
 
-                      sm:mt-3
-                      sm:text-[18px]
+                      sm:mt-2
+                      sm:text-[16px]
                     "
                     style={{
                       color: palette.royal,
@@ -536,13 +541,13 @@ export default function Portada() {
 
                   <motion.div
                     className="
-                      mt-3
+                      mt-2
                       w-full
-                      max-w-[290px]
+                      max-w-[300px]
                       px-2
 
-                      sm:mt-2
-                      sm:max-w-[410px]
+                      sm:mt-1.5
+                      sm:max-w-[390px]
                     "
                     initial={{
                       opacity: 0,
@@ -560,13 +565,13 @@ export default function Portada() {
                     <p
                       className="
                         font-serif
-                        text-[9px]
+                        text-[8.5px]
                         italic
-                        leading-[1.55]
+                        leading-[1.45]
                         tracking-[0.015em]
 
-                        sm:text-[11px]
-                        sm:leading-[1.65]
+                        sm:text-[10px]
+                        sm:leading-[1.5]
                       "
                       style={{
                         color: palette.inkSoft,
@@ -580,12 +585,12 @@ export default function Portada() {
                       className="
                         mt-1
                         font-serif
-                        text-[7px]
+                        text-[6.5px]
                         uppercase
                         tracking-[0.15em]
 
-                        sm:mt-2
-                        sm:text-[8px]
+                        sm:mt-1.5
+                        sm:text-[7.5px]
                         sm:tracking-[0.18em]
                       "
                       style={{
@@ -624,12 +629,12 @@ export default function Portada() {
                 className="
                   intro-envelope
                   relative
-                  mt-3
+                  mt-1
                   h-[290px]
                   w-full
                   max-w-[330px]
 
-                  sm:mt-4
+                  sm:mt-2
                   sm:h-[390px]
                   sm:max-w-[450px]
 
@@ -1276,15 +1281,15 @@ export default function Portada() {
                   intro-guest
                   relative
                   z-50
-                  mt-2
+                  mt-0
                   flex
                   w-full
                   flex-col
                   items-center
 
-                  sm:mt-4
+                  sm:mt-1
 
-                  lg:mt-3
+                  lg:mt-0
                   lg:max-w-[450px]
                 "
                 initial={{
@@ -1326,7 +1331,7 @@ export default function Portada() {
 
                 <p
                   className="
-                    mt-3
+                    mt-2
                     font-serif
                     text-[8px]
                     uppercase
@@ -1378,7 +1383,7 @@ export default function Portada() {
 
                 <p
                   className="
-                    mt-3
+                    mt-2
                     text-[7px]
                     uppercase
                     tracking-[0.24em]
@@ -1524,129 +1529,6 @@ export default function Portada() {
           }}
         >
 
-          {/* NOMBRES */}
-
-          <motion.div
-            className="
-              mt-1
-              flex
-              max-w-4xl
-              flex-col
-              items-center
-
-              sm:mt-2
-            "
-            initial={{
-              opacity: 0,
-              y: 24,
-            }}
-            animate={
-              mostrarContenido
-                ? {
-                    opacity: 1,
-                    y: 0,
-                  }
-                : {
-                    opacity: 0,
-                    y: 24,
-                  }
-            }
-            transition={{
-              duration: 1.1,
-              delay: 0.65,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <h1
-              className="
-                font-cursiveDancing
-                text-[40px]
-                leading-[0.9]
-                text-white
-
-                sm:text-[70px]
-                md:text-[84px]
-                lg:text-[46px]
-              "
-              style={{
-                textShadow:
-                  "0 4px 24px rgba(0,0,0,0.34)",
-              }}
-            >
-              Salvador
-            </h1>
-
-            <div
-              className="
-                my-2
-                flex
-                items-center
-                gap-3
-
-                sm:my-4
-                sm:gap-6
-              "
-            >
-              <span
-                className="
-                  h-px
-                  w-12
-
-                  sm:w-20
-                "
-                style={{
-                  background:
-                    "linear-gradient(to right, transparent, rgba(169,214,245,0.9))",
-                }}
-              />
-
-              <span
-                className="
-                  font-cursiveDancing
-                  text-2xl
-
-                  sm:text-4xl
-                "
-                style={{
-                  color: palette.sky,
-                }}
-              >
-                &
-              </span>
-
-              <span
-                className="
-                  h-px
-                  w-12
-
-                  sm:w-20
-                "
-                style={{
-                  background:
-                    "linear-gradient(to left, transparent, rgba(169,214,245,0.9))",
-                }}
-              />
-            </div>
-
-            <h1
-              className="
-                font-cursiveDancing
-                text-[40px]
-                leading-[0.9]
-                text-white
-
-                sm:text-[70px]
-                md:text-[84px]
-                lg:text-[44px]
-              "
-              style={{
-                textShadow:
-                  "0 4px 24px rgba(0,0,0,0.34)",
-              }}
-            >
-              Angélica
-            </h1>
-          </motion.div>
 
           {/* ===================================
               CONTADOR
