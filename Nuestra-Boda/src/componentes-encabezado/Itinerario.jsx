@@ -30,29 +30,36 @@ const palette = {
 
 const events = [
   {
-    time: "18:00",
-    title: "Ceremonia",
-    description:
-      "Ceremonia civil con nuestros seres queridos.",
-    icon: "rings",
-  },
-  {
-    time: "19:30",
+    time: "5:00 pm",
     title: "Recepción",
     description:
-      "Bienvenida con cóctel y música en vivo.",
+      "Recepción y bienvenida de nuestros invitados.",
     icon: "glass",
   },
   {
-    time: "21:00",
+    time: "5:15 pm",
+    title: "Drink Time",
+    description:
+      "Un momento para disfrutar y brindar juntos.",
+    icon: "glass",
+  },
+  {
+    time: "6:00 pm",
+    title: "Ceremonia religiosa",
+    description:
+      "Ceremonia religiosa con nuestros seres queridos.",
+    icon: "rings",
+  },
+  {
+    time: "8:00 pm",
     title: "Cena",
     description:
       "Banquete con un menú especialmente diseñado.",
     icon: "dinner",
   },
   {
-    time: "23:00",
-    title: "Fiesta",
+    time: "8:30 pm",
+    title: "Celebración",
     description:
       "Una noche para bailar y celebrar juntos.",
     icon: "music",
@@ -712,9 +719,9 @@ export default function ItinerarioRelojCentral() {
               sm:leading-7
             "
           >
-            Cada momento ha sido pensado para
-            compartir, celebrar y guardar juntos un
-            recuerdo inolvidable.
+            Te recomendamos llegar puntualmente para que
+            puedas disfrutar cada momento de nuestra
+            celebración.
           </p>
         </motion.div>
 

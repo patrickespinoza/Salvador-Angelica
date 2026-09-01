@@ -8,12 +8,19 @@ const API_URL =
 
 
 
-const NUMERO_WHATSAPP = "521XXXXXXXXXX";
+const CONTACTOS_WHATSAPP = {
+  novio: {
+    nombre: "Salvador",
+    numero: "527821218662",
+    lado: "Novio",
+  },
 
-
-
-
-const NOMBRE_CONTACTO = "Salvador y Angelica";
+  novia: {
+    nombre: "Angélica",
+    numero: "527821964203",
+    lado: "Novia",
+  },
+};
 
 /* =========================================
    PALETA
@@ -598,7 +605,7 @@ const Confirmacion = () => {
   ========================================= */
 
   const createWhatsAppMessage =
-    () => {
+    (contacto) => {
       const attendanceText =
         asistencia ===
         "Sí asistiré"
@@ -615,7 +622,7 @@ const Confirmacion = () => {
           : "";
 
       return [
-        `Hola ${NOMBRE_CONTACTO}.`,
+        `Hola ${contacto.nombre}.`,
         "",
         `Soy ${nombreInvitado.trim()}.`,
         attendanceText,
@@ -634,12 +641,12 @@ const Confirmacion = () => {
      ABRIR WHATSAPP
   ========================================= */
 
-  const openWhatsApp = () => {
+  const openWhatsApp = (contacto) => {
     const message =
-      createWhatsAppMessage();
+      createWhatsAppMessage(contacto);
 
     const whatsappUrl =
-      `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(
+      `https://wa.me/${contacto.numero}?text=${encodeURIComponent(
         message
       )}`;
 
@@ -653,7 +660,7 @@ const Confirmacion = () => {
   ========================================= */
 
   const enviarConfirmacion =
-    async () => {
+    async (contacto) => {
       if (loading) return;
 
       if (
@@ -718,12 +725,7 @@ const Confirmacion = () => {
         mensaje:
           mensajeInvitado.trim(),
 
-        /*
-          Dejamos un solo origen porque
-          ya no existen dos botones.
-        */
-
-        lado: "WhatsApp",
+        lado: contacto.lado,
 
         pasesAsignados,
       };
@@ -754,7 +756,7 @@ const Confirmacion = () => {
 
         window.setTimeout(
           () => {
-            openWhatsApp();
+            openWhatsApp(contacto);
           },
           650
         );
@@ -1009,17 +1011,15 @@ const Confirmacion = () => {
               mt-5
               max-w-2xl
               font-serif
-              text-[14px]
+              text-[20px]
               italic
               leading-7
               text-white/70
 
-              sm:text-base
+              sm:text-2xl
             "
           >
-            Por favor, confirma tu asistencia y
-            ayúdanos a preparar cada detalle de
-            nuestra celebración.
+            Por favor, confirma tu asistencia antes del 15 de Septiembre.
           </p>
         </motion.div>
 
@@ -1624,95 +1624,114 @@ const Confirmacion = () => {
             </AnimatePresence>
 
             {/* =================================
-                UN SOLO BOTÓN
+                BOTONES DE LOS NOVIOS
             ================================= */}
 
-            <motion.button
-              type="button"
-              onClick={
-                enviarConfirmacion
-              }
-              disabled={loading}
+            <div
               className="
                 mt-9
-                inline-flex
-                min-h-[58px]
-                w-full
-                items-center
-                justify-center
-                gap-3
-                border
-                px-6
-                py-4
-                disabled:cursor-not-allowed
-                disabled:opacity-60
+                grid
+                gap-4
+
+                sm:grid-cols-2
               "
-              style={{
-                backgroundColor:
-                  palette.white,
-
-                borderColor:
-                  palette.white,
-
-                color:
-                  palette.navy,
-
-                boxShadow:
-                  "0 14px 32px rgba(0,0,0,0.16)",
-              }}
-              whileHover={
-                loading
-                  ? undefined
-                  : {
-                      y: -2,
-
-                      backgroundColor:
-                        palette.skyLight,
-
-                      borderColor:
-                        palette.skyLight,
-                    }
-              }
-              whileTap={
-                loading
-                  ? undefined
-                  : {
-                      scale:
-                        0.985,
-                    }
-              }
             >
-              {loading ? (
-                <span
+              {Object.values(
+                CONTACTOS_WHATSAPP
+              ).map((contacto) => (
+                <motion.button
+                  key={contacto.lado}
+                  type="button"
+                  onClick={() =>
+                    enviarConfirmacion(
+                      contacto
+                    )
+                  }
+                  disabled={loading}
                   className="
-                    h-5
-                    w-5
-                    animate-spin
-                    rounded-full
-                    border-2
-                    border-[#102A52]/25
-                    border-t-[#102A52]
+                    inline-flex
+                    min-h-[58px]
+                    w-full
+                    items-center
+                    justify-center
+                    gap-3
+                    border
+                    px-5
+                    py-4
+                    disabled:cursor-not-allowed
+                    disabled:opacity-60
                   "
-                />
-              ) : (
-                <WhatsAppIcon />
-              )}
+                  style={{
+                    backgroundColor:
+                      palette.white,
 
-              <span
-                className="
-                  text-[9px]
-                  uppercase
-                  tracking-[0.28em]
+                    borderColor:
+                      palette.white,
 
-                  sm:text-[10px]
-                  sm:tracking-[0.34em]
-                "
-              >
-                {loading
-                  ? "Registrando confirmación"
-                  : "Confirmar asistencia"}
-              </span>
-            </motion.button>
+                    color:
+                      palette.navy,
+
+                    boxShadow:
+                      "0 14px 32px rgba(0,0,0,0.16)",
+                  }}
+                  whileHover={
+                    loading
+                      ? undefined
+                      : {
+                          y: -2,
+
+                          backgroundColor:
+                            palette.skyLight,
+
+                          borderColor:
+                            palette.skyLight,
+                        }
+                  }
+                  whileTap={
+                    loading
+                      ? undefined
+                      : {
+                          scale: 0.985,
+                        }
+                  }
+                >
+                  {loading ? (
+                    <span
+                      className="
+                        h-5
+                        w-5
+                        animate-spin
+                        rounded-full
+                        border-2
+                        border-[#102A52]/25
+                        border-t-[#102A52]
+                      "
+                    />
+                  ) : (
+                    <WhatsAppIcon />
+                  )}
+
+                  <span
+                    className="
+                      text-[9px]
+                      uppercase
+                      tracking-[0.22em]
+
+                      sm:text-[10px]
+                    "
+                  >
+                    {loading
+                      ? "Registrando"
+                      : `Confirmar con ${
+                          contacto.lado ===
+                          "Novio"
+                            ? "el novio"
+                            : "la novia"
+                        }`}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
 
             {/* =================================
                 TEXTO FINAL

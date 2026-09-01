@@ -517,9 +517,9 @@ export default function FrasePremium() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          Con profunda gratitud le entregamos,
+          Con profunda gratitud le entregamos
           <br className="hidden sm:block" />
-          este dia a Dios, quien
+          este día a Dios quien
           <br />
           hizo posible este amor.
         </motion.blockquote>
@@ -593,7 +593,7 @@ export default function FrasePremium() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          Queremos que Él sea el centro de,
+          Queremos que Él sea el centro de
           <br className="hidden sm:block" />
           nuestro hogar y Tú, testigo
           <br />

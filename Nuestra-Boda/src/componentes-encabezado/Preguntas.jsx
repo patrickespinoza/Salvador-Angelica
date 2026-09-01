@@ -8,7 +8,7 @@ import html2canvas from "html2canvas";
 ========================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxQTHIUXU3wWSw_mg7wvwbjwLbzskGcgGaGKzuY_yUK1r-RfPfXtSB7WD4CfZ6W7f5QJg/exec";
+  "https://script.google.com/macros/s/AKfycbxb-9RatIZp2faA5UXY9zIBSkvBXjw4Z313GjxnCkWs12oEM_FfIMqXKoBpRLIwj2oD/exec";
 
 /* =========================================
    PALETA
@@ -44,57 +44,57 @@ const palette = {
 
 const preguntas = [
   {
-    pregunta: "¿Dónde se conocieron Valeria y Alejandro?",
+    pregunta: "¿Dónde se conocieron Salvador y Angélica?",
     opciones: [
-      "En la Universidad",
-      "En una Fiesta",
+      "En la iglesia",
+      "En la escuela",
       "En el trabajo",
-      "Por una app",
-      "En un viaje",
+      "En una fiesta",
+      "Por amigos",
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Quién dijo “te amo” primero?",
+    pregunta: "¿En qué mes comenzaron a hablarse?",
     opciones: [
-      "Valeria",
-      "Alejandro",
-      "Ambos",
-      "Nadie",
-      "Fue un accidente",
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Cuál es su comida favorita?",
-    opciones: [
-      "Pizza",
-      "Sushi",
-      "Tacos",
-      "Pasta",
-      "Hamburguesas",
+      "Enero",
+      "Marzo",
+      "Agosto",
+      "Octubre",
+      "Diciembre",
     ],
     correcta: 2,
   },
   {
-    pregunta: "¿Dónde fue su primera cita?",
+    pregunta: "¿Quién de los dos es introvertido?",
     opciones: [
-      "Cine",
-      "Restaurante",
-      "Parque",
-      "Café",
-      "Playa",
+      "Angélica",
+      "Salvador",
+      "Ambos",
+      "Ninguno",
+      "Depende del momento",
     ],
-    correcta: 3,
+    correcta: 0,
   },
   {
-    pregunta: "¿Quién es más puntual?",
+    pregunta: "¿Quién de los dos es más puntual?",
     opciones: [
-      "Valeria",
-      "Alejandro",
+      "Angélica",
+      "Salvador",
       "Ambos",
       "Ninguno",
       "Depende del día",
+    ],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿Quién dijo “te amo” primero?",
+    opciones: [
+      "Angélica",
+      "Salvador",
+      "Ambos",
+      "Ninguno",
+      "Fue al mismo tiempo",
     ],
     correcta: 0,
   },

@@ -535,7 +535,7 @@ export default function EventoDireccion() {
           >
             Nos hará muy felices compartir con
             ustedes el comienzo de este nuevo
-            capítulo.
+            capítulo en nuestras vidas.
           </p>
         </motion.div>
 

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
    DISEÑO:
    - Fondo blanco
    - Texto negro
-   - Sin iconos
+   - Iconos de vestido y traje
    - Estilo clásico
 ========================================= */
 
@@ -17,6 +17,7 @@ const palette = {
   black: "#111111",
   blackSoft: "#343434",
   gray: "#747474",
+  iconBlue: "#131c46",
   line: "#D9D9D9",
   lineSoft: "#EEEEEE",
 };
@@ -36,6 +37,11 @@ const fadeUp = {
       ease: [0.22, 1, 0.36, 1],
     },
   },
+};
+
+const reservedColors = {
+  ladies: ["#131c46", "#3c4c8f", "#3591d8", "#80c4f9", "#0e8aef"],
+  gentlemen: ["#5e5e5e", "#6f6f6f", "#828282", "#aaaaaa", "#c6c6c6"],
 };
 
 /* =========================================
@@ -86,12 +92,115 @@ function DecorativeDivider({ compact = false }) {
 }
 
 /* =========================================
+   ICONOS DE VESTIMENTA
+========================================= */
+
+function DressIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-14 w-14 sm:h-16 sm:w-16"
+      style={{ color: palette.iconBlue }}
+    >
+      <path
+        d="M25 8C25 12.4 22.7 16.4 19 19L24 31L14 54H50L40 31L45 19C41.3 16.4 39 12.4 39 8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M25 8C27.2 10.4 29.5 11.5 32 11.5C34.5 11.5 36.8 10.4 39 8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M24 31H40"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function SuitIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-14 w-14 sm:h-16 sm:w-16"
+      style={{ color: palette.iconBlue }}
+    >
+      <path
+        d="M22 9L13 16L9 54H55L51 16L42 9"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22 9L32 22L42 9"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M27 9L32 14L37 9M32 22V54"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M20 31H27M37 31H44"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/* =========================================
+   CÍRCULOS DE COLORES RESERVADOS
+========================================= */
+
+function ReservedColorCircles({ colors, label }) {
+  return (
+    <div
+      className="mt-5 flex flex-wrap items-center justify-center gap-3"
+      role="img"
+      aria-label={label}
+    >
+      {colors.map((color) => (
+        <span
+          key={color}
+          title={color}
+          className="h-9 w-9 rounded-full border border-black/10 sm:h-10 sm:w-10"
+          style={{ backgroundColor: color }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* =========================================
    BLOQUE DE INFORMACIÓN
 ========================================= */
 
 function DressOption({
   number,
   title,
+  icon,
   children,
   delay = 0,
 }) {
@@ -136,6 +245,12 @@ function DressOption({
         ease: [0.22, 1, 0.36, 1],
       }}
     >
+      {/* ICONO */}
+
+      <div className="mb-5 flex items-center justify-center">
+        {icon}
+      </div>
+
       {/* NÚMERO */}
 
       <p
@@ -435,6 +550,7 @@ const DressCodePremium = () => {
           <DressOption
             number="01"
             title="Damas"
+            icon={<DressIcon />}
             delay={0.12}
           >
             <p>
@@ -462,6 +578,11 @@ const DressCodePremium = () => {
               </span>
               .
             </p>
+
+            <ReservedColorCircles
+              colors={reservedColors.ladies}
+              label="Tonos azules reservados"
+            />
           </DressOption>
 
           {/* CABALLEROS */}
@@ -469,6 +590,7 @@ const DressCodePremium = () => {
           <DressOption
             number="02"
             title="Caballeros"
+            icon={<SuitIcon />}
             delay={0.24}
           >
             <p>
@@ -483,11 +605,16 @@ const DressCodePremium = () => {
               El color
               <span className="font-semibold">
                 {" "}
-                gris Oxford
+                gris Oxford y sus subtonos
               </span>
               {" "}
-              está reservado especialmente para el novio.
+              están reservados especialmente para el novio.
             </p>
+
+            <ReservedColorCircles
+              colors={reservedColors.gentlemen}
+              label="Tonos gris Oxford reservados"
+            />
           </DressOption>
         </div>
 

@@ -490,9 +490,9 @@ export default function Galeria() {
               color: palette.blackSoft,
             }}
           >
-            Un recorrido por los instantes que han
-            dado forma a nuestra historia.
+            Cada foto refleja el amor que Dios ha hecho nacer entre nosotros y nuestro anhelo es compartirlo contigo
           </p>
+
         </motion.div>
 
         {/* =====================================
@@ -1002,6 +1002,7 @@ export default function Galeria() {
             }}
           />
 
+          
           <p
             className="
               font-serif
@@ -1015,9 +1016,22 @@ export default function Galeria() {
               color: palette.blackSoft,
             }}
           >
-            Cada fotografía guarda un instante de
-            nuestro camino y una parte de la
-            historia que hoy celebramos.
+             Sin embargo, Dios lo hizo todo hermoso para el momento apropiado.
+          </p>
+          <p
+            className="
+              font-serif
+              text-[13px]
+              italic
+              leading-7
+
+              sm:text-[15px]
+            "
+            style={{
+              color: palette.blackSoft,
+            }}
+          >
+             Eclesiastés 3:11
           </p>
         </motion.div>
       </div>

@@ -9,6 +9,7 @@ import EventoDireccion from "./componentes-encabezado/Ubicacion";
 import DressCodePremium from "./componentes-encabezado/codigovestimenta";
 import Galeria from "./componentes-encabezado/Galeria";
 import Album from "./componentes-encabezado/albun";
+import ImagenFinal from "./componentes-encabezado/final";
 
 
 export default function PaginaPrincipal() {
@@ -63,6 +64,8 @@ export default function PaginaPrincipal() {
 <Regalos/>
 
 <Confirmacion/>
+
+<ImagenFinal/>
   
 
       </div>      
