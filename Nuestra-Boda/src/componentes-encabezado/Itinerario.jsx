@@ -40,7 +40,7 @@ const events = [
     time: "5:15 pm",
     title: "Drink Time",
     description:
-      "Un momento para disfrutar y brindar juntos.",
+      "Un momento para disfrutar.",
     icon: "glass",
   },
   {
