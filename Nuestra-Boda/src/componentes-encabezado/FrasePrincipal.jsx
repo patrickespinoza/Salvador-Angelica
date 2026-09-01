@@ -483,18 +483,18 @@ export default function FrasePremium() {
             mt-8
             max-w-4xl
             font-serif
-            text-[25px]
+            text-[24px]
             font-normal
             leading-[1.55]
             tracking-[-0.015em]
 
             sm:mt-10
-            sm:text-[34px]
+            sm:text-[33px]
             sm:leading-[1.5]
 
-            md:text-[39px]
+            md:text-[38px]
 
-            lg:text-[44px]
+            lg:text-[43px]
             lg:leading-[1.45]
           "
           style={{
@@ -519,7 +519,7 @@ export default function FrasePremium() {
         >
           Con profunda gratitud le entregamos
           <br className="hidden sm:block" />
-          este día a Dios quien
+           {" "}este día a Dios quien
           <br />
           hizo posible este amor.
         </motion.blockquote>

@@ -24,7 +24,7 @@ const EVENTO = {
   mes: "Octubre",
   anio: "2026",
 
-  hora: "Por confirmar",
+  hora: "5:00 pm",
 
   lugar: "Jardín de Eventos Admirable",
 
