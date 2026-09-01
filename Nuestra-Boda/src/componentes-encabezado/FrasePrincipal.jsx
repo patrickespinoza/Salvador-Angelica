@@ -595,7 +595,7 @@ export default function FrasePremium() {
         >
           Queremos que Él sea el centro de
           <br className="hidden sm:block" />
-          nuestro hogar y Tú, testigo
+          {" "} nuestro hogar y Tú, testigo
           <br />
           de este momento especial.
         </motion.blockquote>
