@@ -1,24 +1,47 @@
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-import Portada from './componentes-encabezado/portada'
-import PaginaPrincipal from './PaginaPrincipal'
-import Generador from './pages/Generador'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import Portada from "./componentes-encabezado/portada";
+import PaginaPrincipal from "./PaginaPrincipal";
+import Generador from "./pages/Generador";
+import Reconfirmacion from "./pages/Reconfirmacion";
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(
   <BrowserRouter>
     <Routes>
-      {/* Invitación */}
-      <Route path="/" element={
-        <>
-          <Portada />
-          <PaginaPrincipal />
-        </>
-      } />
+      {/* INVITACIÓN PRINCIPAL */}
 
-      {/* Generador */}
-      <Route path="/generador" element={<Generador />} />
+      <Route
+        path="/"
+        element={
+          <>
+            <Portada />
+            <PaginaPrincipal />
+          </>
+        }
+      />
+
+      {/* GENERADOR */}
+
+      <Route
+        path="/generador"
+        element={<Generador />}
+      />
+
+      {/* RECONFIRMACIÓN */}
+
+      <Route
+        path="/reconfirmacion"
+        element={<Reconfirmacion />}
+      />
     </Routes>
   </BrowserRouter>
-)
+);

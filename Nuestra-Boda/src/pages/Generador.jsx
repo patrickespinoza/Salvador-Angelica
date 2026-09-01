@@ -6,43 +6,398 @@ const palette = {
   paper: "#D9EBF8",
   paperLight: "#FFFFFF",
   paperDark: "#9CCBF0",
-  antiqueGold: "#184EA6",
-  antiqueGoldDark: "#102A52",
+  royal: "#184EA6",
   warmGray: "#4B5563",
-  line: "#9CCBF0",
 };
 
+/* =========================================
+   CREAR BASE64 COMPATIBLE CON ACENTOS
+========================================= */
+
+function encodeBase64Utf8(value) {
+  const bytes =
+    new TextEncoder().encode(
+      value
+    );
+
+  let binary = "";
+
+  bytes.forEach((byte) => {
+    binary +=
+      String.fromCharCode(byte);
+  });
+
+  return window.btoa(binary);
+}
+
+/* =========================================
+   COMPONENTE PARA MOSTRAR CADA ENLACE
+========================================= */
+
+function ResultadoEnlace({
+  titulo,
+  descripcion,
+  link,
+  mensaje,
+  setMensaje,
+  tipo,
+  copiado,
+  copiarLink,
+  copiarMensaje,
+}) {
+  return (
+    <section
+      className="
+        border
+        bg-white/75
+        p-5
+        shadow-[0_16px_45px_rgba(16,42,82,0.07)]
+
+        sm:p-7
+      "
+      style={{
+        borderColor:
+          "rgba(24,78,166,0.27)",
+      }}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p
+            className="
+              text-[8px]
+              uppercase
+              tracking-[0.3em]
+            "
+            style={{
+              color:
+                palette.royal,
+            }}
+          >
+            {tipo ===
+            "reconfirmacion"
+              ? "Segundo envío"
+              : "Primer envío"}
+          </p>
+
+          <h3
+            className="
+              mt-2
+              font-serif
+              text-2xl
+            "
+            style={{
+              color:
+                palette.ink,
+            }}
+          >
+            {titulo}
+          </h3>
+
+          <p
+            className="
+              mt-2
+              text-xs
+              leading-5
+            "
+            style={{
+              color:
+                palette.warmGray,
+            }}
+          >
+            {descripcion}
+          </p>
+        </div>
+
+        <span
+          className="
+            shrink-0
+            border
+            px-3
+            py-2
+            text-[8px]
+            uppercase
+            tracking-[0.18em]
+          "
+          style={{
+            borderColor:
+              "rgba(24,78,166,0.35)",
+
+            color:
+              palette.ink,
+          }}
+        >
+          {tipo ===
+          "reconfirmacion"
+            ? "Reconfirmación"
+            : "Invitación"}
+        </span>
+      </div>
+
+      {/* LINK */}
+
+      <div className="mt-6">
+        <p
+          className="
+            mb-2
+            text-[8px]
+            uppercase
+            tracking-[0.25em]
+          "
+          style={{
+            color:
+              palette.warmGray,
+          }}
+        >
+          Enlace personalizado
+        </p>
+
+        <div
+          className="
+            break-all
+            border
+            p-4
+            text-xs
+            leading-5
+          "
+          style={{
+            backgroundColor:
+              palette.paper,
+
+            borderColor:
+              "rgba(24,78,166,0.3)",
+
+            color:
+              palette.inkSoft,
+          }}
+        >
+          {link}
+        </div>
+
+        <button
+          type="button"
+          onClick={() =>
+            copiarLink(
+              tipo,
+              link
+            )
+          }
+          className="
+            mt-3
+            w-full
+            border
+            px-5
+            py-3
+            text-[9px]
+            uppercase
+            tracking-[0.23em]
+            transition
+            hover:bg-black/5
+          "
+          style={{
+            borderColor:
+              "rgba(16,42,82,0.4)",
+
+            color:
+              palette.ink,
+          }}
+        >
+          {copiado ===
+          `link-${tipo}`
+            ? "Enlace copiado ✓"
+            : "Copiar enlace"}
+        </button>
+      </div>
+
+      {/* MENSAJE */}
+
+      <div
+        className="
+          mt-7
+          border-t
+          pt-6
+        "
+        style={{
+          borderColor:
+            "rgba(24,78,166,0.25)",
+        }}
+      >
+        <p
+          className="
+            text-[8px]
+            uppercase
+            tracking-[0.25em]
+          "
+          style={{
+            color:
+              palette.warmGray,
+          }}
+        >
+          Mensaje para WhatsApp
+        </p>
+
+        <p
+          className="
+            mt-2
+            text-xs
+            leading-5
+          "
+          style={{
+            color:
+              palette.warmGray,
+          }}
+        >
+          Puedes editarlo antes de copiar.
+        </p>
+
+        <textarea
+          value={mensaje}
+          onChange={(event) =>
+            setMensaje(
+              event.target.value
+            )
+          }
+          rows={13}
+          className="
+            mt-4
+            w-full
+            resize-y
+            border
+            bg-white
+            p-4
+            text-sm
+            leading-6
+            outline-none
+          "
+          style={{
+            borderColor:
+              "rgba(24,78,166,0.35)",
+
+            color:
+              palette.ink,
+          }}
+        />
+
+        <button
+          type="button"
+          onClick={() =>
+            copiarMensaje(
+              tipo,
+              mensaje
+            )
+          }
+          className="
+            mt-3
+            w-full
+            px-6
+            py-4
+            text-[9px]
+            uppercase
+            tracking-[0.23em]
+            text-white
+            transition
+            hover:opacity-90
+          "
+          style={{
+            backgroundColor:
+              tipo ===
+              "reconfirmacion"
+                ? palette.royal
+                : palette.ink,
+          }}
+        >
+          {copiado ===
+          `mensaje-${tipo}`
+            ? "Mensaje copiado ✓"
+            : "Copiar mensaje para WhatsApp"}
+        </button>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================
+   GENERADOR
+========================================= */
+
 export default function Generador() {
-  const [nombre, setNombre] = useState("");
-  const [pases, setPases] = useState("1");
+  const [
+    nombre,
+    setNombre,
+  ] = useState("");
 
-  const [link, setLink] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  const [
+    pases,
+    setPases,
+  ] = useState("1");
 
-  const [linkCopiado, setLinkCopiado] = useState(false);
-  const [mensajeCopiado, setMensajeCopiado] = useState(false);
+  const [
+    linkInvitacion,
+    setLinkInvitacion,
+  ] = useState("");
+
+  const [
+    linkReconfirmacion,
+    setLinkReconfirmacion,
+  ] = useState("");
+
+  const [
+    mensajeInvitacion,
+    setMensajeInvitacion,
+  ] = useState("");
+
+  const [
+    mensajeReconfirmacion,
+    setMensajeReconfirmacion,
+  ] = useState("");
+
+  const [
+    copiado,
+    setCopiado,
+  ] = useState("");
 
   /* =========================================
-     GENERAR ID ENCRIPTADO
-     Compatible con Portada.jsx
+     LIMPIAR RESULTADOS
   ========================================= */
 
-  const crearId = (nombreInvitado, numeroPases) => {
-    const datos = {
-      nombre: nombreInvitado,
-      pases: numeroPases,
+  const limpiarResultados =
+    () => {
+      setLinkInvitacion("");
+      setLinkReconfirmacion("");
+      setMensajeInvitacion("");
+      setMensajeReconfirmacion("");
+      setCopiado("");
     };
 
-    const textoOriginal = JSON.stringify(datos);
+  /* =========================================
+     CREAR ID PERSONALIZADO
+  ========================================= */
 
-    const textoInvertido = textoOriginal
-      .split("")
-      .reverse()
-      .join("");
+  const crearId = (
+    nombreInvitado,
+    numeroPases
+  ) => {
+    const datos = {
+      nombre:
+        nombreInvitado,
 
-    const base64 = btoa(textoInvertido);
+      pases:
+        numeroPases,
+    };
 
-    // Base64 seguro para URL
+    const textoOriginal =
+      JSON.stringify(datos);
+
+    const textoInvertido =
+      textoOriginal
+        .split("")
+        .reverse()
+        .join("");
+
+    const base64 =
+      encodeBase64Utf8(
+        textoInvertido
+      );
+
     return base64
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
@@ -50,43 +405,79 @@ export default function Generador() {
   };
 
   /* =========================================
-     GENERAR LINK
+     GENERAR LOS DOS ENLACES
   ========================================= */
 
-  const generarLink = () => {
-    const nombreLimpio = nombre.trim();
-    const numeroPases = Number.parseInt(pases, 10);
+  const generarEnlaces =
+    () => {
+      const nombreLimpio =
+        nombre
+          .trim()
+          .replace(/\s+/g, " ");
 
-    if (!nombreLimpio) {
-      alert("Escribe el nombre del invitado o familia.");
-      return;
-    }
+      const numeroPases =
+        Number.parseInt(
+          pases,
+          10
+        );
 
-    if (
-      Number.isNaN(numeroPases) ||
-      numeroPases < 1
-    ) {
-      alert("Ingresa un número válido de lugares.");
-      return;
-    }
+      if (!nombreLimpio) {
+        window.alert(
+          "Escribe el nombre del invitado o familia."
+        );
 
-    const id = crearId(
-      nombreLimpio,
-      numeroPases
-    );
+        return;
+      }
 
-    const url = `${window.location.origin}/?id=${encodeURIComponent(
-      id
-    )}`;
+      if (
+        Number.isNaN(
+          numeroPases
+        ) ||
+        numeroPases < 1
+      ) {
+        window.alert(
+          "Ingresa un número válido de lugares."
+        );
 
-    setLink(url);
+        return;
+      }
 
-    const textoPases =
-      numeroPases === 1
-        ? "1 lugar"
-        : `${numeroPases} lugares`;
+      const id =
+        crearId(
+          nombreLimpio,
+          numeroPases
+        );
 
-    const mensajeWhatsApp = `✨ Invitación especial ✨
+      const origen =
+        window.location.origin;
+
+      const invitationUrl =
+        `${origen}/?id=${encodeURIComponent(
+          id
+        )}`;
+
+      const reconfirmationUrl =
+        `${origen}/reconfirmacion?id=${encodeURIComponent(
+          id
+        )}`;
+
+      setLinkInvitacion(
+        invitationUrl
+      );
+
+      setLinkReconfirmacion(
+        reconfirmationUrl
+      );
+
+      const textoPases =
+        numeroPases === 1
+          ? "1 lugar"
+          : `${numeroPases} lugares`;
+
+      /* MENSAJE DE INVITACIÓN */
+
+      const invitationMessage =
+`✨ Invitación especial ✨
 
 Hola ${nombreLimpio} 🤍
 
@@ -97,65 +488,108 @@ Hemos reservado especialmente para ti:
 
 Puedes consultar todos los detalles de nuestra celebración en el siguiente enlace:
 
-${url}
+${invitationUrl}
 
 Será un gusto compartir este momento tan especial contigo.
 
 Salvador & Angélica 🤍`;
 
-    setMensaje(mensajeWhatsApp);
+      /* MENSAJE DE RECONFIRMACIÓN */
 
-    setLinkCopiado(false);
-    setMensajeCopiado(false);
-  };
+      const reconfirmationMessage =
+`✨ Reconfirmación de asistencia ✨
 
-  /* =========================================
-     COPIAR LINK
-  ========================================= */
+Hola ${nombreLimpio} 🤍
 
-  const copiarLink = async () => {
-    if (!link) return;
+Nuestro gran día está cada vez más cerca y queremos confirmar nuevamente que podremos contar contigo.
 
-    try {
-      await navigator.clipboard.writeText(link);
+Hemos reservado para ti:
+🎟️ ${textoPases}
 
-      setLinkCopiado(true);
+Por favor, reconfirma tu asistencia antes del 15 de octubre en el siguiente enlace:
 
-      setTimeout(() => {
-        setLinkCopiado(false);
-      }, 2000);
-    } catch (error) {
-      console.error(
-        "No se pudo copiar el link:",
-        error
+${reconfirmationUrl}
+
+Muchas gracias por ayudarnos con la organización de este día tan especial.
+
+Salvador & Angélica 🤍`;
+
+      setMensajeInvitacion(
+        invitationMessage
       );
-    }
-  };
+
+      setMensajeReconfirmacion(
+        reconfirmationMessage
+      );
+
+      setCopiado("");
+    };
 
   /* =========================================
-     COPIAR MENSAJE
+     COPIAR
   ========================================= */
 
-  const copiarMensaje = async () => {
-    if (!mensaje) return;
+  const copiarTexto =
+    async (
+      identificador,
+      texto
+    ) => {
+      if (!texto) {
+        return;
+      }
 
-    try {
-      await navigator.clipboard.writeText(
+      try {
+        await navigator.clipboard.writeText(
+          texto
+        );
+
+        setCopiado(
+          identificador
+        );
+
+        window.setTimeout(
+          () => {
+            setCopiado("");
+          },
+          2000
+        );
+      } catch (error) {
+        console.error(
+          "No se pudo copiar:",
+          error
+        );
+
+        window.alert(
+          "No se pudo copiar automáticamente."
+        );
+      }
+    };
+
+  const copiarLink =
+    (tipo, link) => {
+      copiarTexto(
+        `link-${tipo}`,
+        link
+      );
+    };
+
+  const copiarMensaje =
+    (tipo, mensaje) => {
+      copiarTexto(
+        `mensaje-${tipo}`,
         mensaje
       );
+    };
 
-      setMensajeCopiado(true);
+  const hayResultados =
+    Boolean(
+      linkInvitacion &&
+        linkReconfirmacion
+    );
 
-      setTimeout(() => {
-        setMensajeCopiado(false);
-      }, 2000);
-    } catch (error) {
-      console.error(
-        "No se pudo copiar el mensaje:",
-        error
-      );
-    }
-  };
+  /* =========================================
+     RENDER
+  ========================================= */
 
   return (
     <main
@@ -164,13 +598,18 @@ Salvador & Angélica 🤍`;
         w-full
         px-4
         py-8
+
         sm:px-6
         sm:py-12
         lg:px-10
       "
       style={{
-        backgroundColor: palette.paperLight,
-        color: palette.ink,
+        backgroundColor:
+          palette.paperLight,
+
+        color:
+          palette.ink,
+
         backgroundImage: `
           repeating-linear-gradient(
             0deg,
@@ -182,11 +621,9 @@ Salvador & Angélica 🤍`;
         `,
       }}
     >
-      {/* =========================================
-          ENCABEZADO
-      ========================================= */}
+      {/* ENCABEZADO */}
 
-      <div
+      <header
         className="
           mx-auto
           mb-10
@@ -199,10 +636,12 @@ Salvador & Angélica 🤍`;
             text-[9px]
             uppercase
             tracking-[0.4em]
+
             sm:text-[10px]
           "
           style={{
-            color: palette.antiqueGoldDark,
+            color:
+              palette.royal,
           }}
         >
           Salvador & Angélica
@@ -214,6 +653,7 @@ Salvador & Angélica 🤍`;
             font-serif
             text-3xl
             font-normal
+
             sm:text-4xl
             lg:text-5xl
           "
@@ -238,84 +678,77 @@ Salvador & Angélica 🤍`;
           className="
             mx-auto
             mt-5
-            max-w-xl
+            max-w-2xl
             font-serif
             text-sm
             leading-6
+
             sm:text-base
           "
           style={{
-            color: palette.warmGray,
+            color:
+              palette.warmGray,
           }}
         >
-          Personaliza el nombre y los lugares
-          reservados para cada invitado.
+          Genera la invitación inicial y la
+          reconfirmación con los mismos datos
+          personalizados.
         </p>
-      </div>
-
-      {/* =========================================
-          GRID PRINCIPAL
-      ========================================= */}
+      </header>
 
       <div
         className="
           mx-auto
           grid
-          max-w-6xl
+          max-w-7xl
           gap-8
-          lg:grid-cols-[0.9fr_1.1fr]
-          lg:gap-12
+
+          lg:grid-cols-[380px_1fr]
+          lg:items-start
+          lg:gap-10
         "
       >
-        {/* =========================================
-            FORMULARIO
-        ========================================= */}
+        {/* FORMULARIO */}
 
         <section
           className="
-            order-2
             border
-            bg-white/70
+            bg-white/80
             p-5
             shadow-[0_18px_50px_rgba(16,42,82,0.08)]
-            backdrop-blur-sm
+
             sm:p-8
-            lg:order-1
+            lg:sticky
+            lg:top-8
           "
           style={{
             borderColor:
               "rgba(24,78,166,0.28)",
           }}
         >
-          <div>
-            <p
-              className="
-                text-[9px]
-                uppercase
-                tracking-[0.32em]
-              "
-              style={{
-                color: palette.antiqueGoldDark,
-              }}
-            >
-              Datos del invitado
-            </p>
+          <p
+            className="
+              text-[9px]
+              uppercase
+              tracking-[0.32em]
+            "
+            style={{
+              color:
+                palette.royal,
+            }}
+          >
+            Datos del invitado
+          </p>
 
-            <h2
-              className="
-                mt-3
-                font-serif
-                text-2xl
-              "
-            >
-              Crear invitación
-            </h2>
-          </div>
+          <h2 className="mt-3 font-serif text-2xl">
+            Crear enlaces
+          </h2>
 
           {/* NOMBRE */}
 
           <div className="mt-7">
             <label
+              htmlFor="guest-name"
               className="
                 mb-2
                 block
@@ -324,19 +757,24 @@ Salvador & Angélica 🤍`;
                 tracking-[0.24em]
               "
               style={{
-                color: palette.warmGray,
+                color:
+                  palette.warmGray,
               }}
             >
               Nombre o familia
             </label>
 
             <input
+              id="guest-name"
               type="text"
               placeholder="Ej. Familia Hernández"
               value={nombre}
-              onChange={(e) => {
-                setNombre(e.target.value);
-                setLink("");
+              onChange={(event) => {
+                setNombre(
+                  event.target.value
+                );
+
+                limpiarResultados();
               }}
               className="
                 w-full
@@ -347,9 +785,7 @@ Salvador & Angélica 🤍`;
                 font-serif
                 text-base
                 outline-none
-                transition
                 placeholder:text-gray-400
-                focus:ring-1
               "
               style={{
                 borderColor:
@@ -362,6 +798,7 @@ Salvador & Angélica 🤍`;
 
           <div className="mt-5">
             <label
+              htmlFor="guest-passes"
               className="
                 mb-2
                 block
@@ -370,20 +807,25 @@ Salvador & Angélica 🤍`;
                 tracking-[0.24em]
               "
               style={{
-                color: palette.warmGray,
+                color:
+                  palette.warmGray,
               }}
             >
               Número de lugares
             </label>
 
             <input
+              id="guest-passes"
               type="number"
               min="1"
               inputMode="numeric"
               value={pases}
-              onChange={(e) => {
-                setPases(e.target.value);
-                setLink("");
+              onChange={(event) => {
+                setPases(
+                  event.target.value
+                );
+
+                limpiarResultados();
               }}
               className="
                 w-full
@@ -394,8 +836,6 @@ Salvador & Angélica 🤍`;
                 font-serif
                 text-base
                 outline-none
-                transition
-                focus:ring-1
               "
               style={{
                 borderColor:
@@ -408,7 +848,9 @@ Salvador & Angélica 🤍`;
 
           <button
             type="button"
-            onClick={generarLink}
+            onClick={
+              generarEnlaces
+            }
             className="
               mt-7
               w-full
@@ -423,102 +865,40 @@ Salvador & Angélica 🤍`;
               active:scale-[0.99]
             "
             style={{
-              backgroundColor: palette.ink,
+              backgroundColor:
+                palette.ink,
             }}
           >
-            Generar invitación
+            Generar ambos enlaces
           </button>
 
-          {/* LINK */}
-
-          {link && (
-            <div className="mt-7">
-              <p
-                className="
-                  mb-2
-                  text-[9px]
-                  uppercase
-                  tracking-[0.26em]
-                "
-                style={{
-                  color: palette.warmGray,
-                }}
-              >
-                Link personalizado
-              </p>
-
-              <div
-                className="
-                  break-all
-                  border
-                  bg-[#D9EBF8]
-                  p-4
-                  text-xs
-                  leading-5
-                "
-                style={{
-                  borderColor:
-                    "rgba(24,78,166,0.3)",
-                  color: palette.inkSoft,
-                }}
-              >
-                {link}
-              </div>
-
-              <button
-                type="button"
-                onClick={copiarLink}
-                className="
-                  mt-3
-                  w-full
-                  border
-                  px-5
-                  py-3
-                  text-[9px]
-                  uppercase
-                  tracking-[0.24em]
-                  transition
-                  hover:bg-black/5
-                "
-                style={{
-                  borderColor:
-                    "rgba(16,42,82,0.4)",
-                }}
-              >
-                {linkCopiado
-                  ? "Link copiado ✓"
-                  : "Copiar link"}
-              </button>
-            </div>
-          )}
-
-          {/* =========================================
-              MENSAJE WHATSAPP
-          ========================================= */}
-
-          {link && (
+          {hayResultados && (
             <div
               className="
-                mt-8
-                border-t
-                pt-7
+                mt-7
+                border
+                p-4
               "
               style={{
+                backgroundColor:
+                  "rgba(217,235,248,0.45)",
+
                 borderColor:
-                  "rgba(24,78,166,0.28)",
+                  "rgba(24,78,166,0.25)",
               }}
             >
               <p
                 className="
                   text-[9px]
                   uppercase
-                  tracking-[0.28em]
+                  tracking-[0.23em]
                 "
                 style={{
-                  color: palette.antiqueGoldDark,
+                  color:
+                    palette.royal,
                 }}
               >
-                Mensaje para WhatsApp
+                Enlaces creados
               </p>
 
               <p
@@ -528,125 +908,36 @@ Salvador & Angélica 🤍`;
                   leading-5
                 "
                 style={{
-                  color: palette.warmGray,
+                  color:
+                    palette.warmGray,
                 }}
               >
-                Puedes editar el mensaje antes de
-                copiarlo.
+                Envía primero la invitación.
+                Cuando llegue el momento,
+                utiliza el enlace de
+                reconfirmación.
               </p>
-
-              <textarea
-                value={mensaje}
-                onChange={(e) =>
-                  setMensaje(e.target.value)
-                }
-                rows={14}
-                className="
-                  mt-4
-                  w-full
-                  resize-y
-                  border
-                  bg-white
-                  p-4
-                  text-sm
-                  leading-6
-                  outline-none
-                  focus:ring-1
-                "
-                style={{
-                  borderColor:
-                    "rgba(24,78,166,0.35)",
-                }}
-              />
-
-              <button
-                type="button"
-                onClick={copiarMensaje}
-                className="
-                  mt-3
-                  w-full
-                  px-6
-                  py-4
-                  text-[10px]
-                  uppercase
-                  tracking-[0.24em]
-                  text-white
-                  transition
-                  hover:opacity-90
-                "
-                style={{
-                  backgroundColor:
-                    palette.antiqueGoldDark,
-                }}
-              >
-                {mensajeCopiado
-                  ? "Mensaje copiado ✓"
-                  : "Copiar mensaje para WhatsApp"}
-              </button>
             </div>
           )}
-        </section>
 
-        {/* =========================================
-            IMAGEN DE PORTADA
-        ========================================= */}
-
-        <section
-          className="
-            order-1
-            flex
-            flex-col
-            items-center
-            lg:order-2
-          "
-        >
-          <div className="mb-5 text-center">
-            <p
-              className="
-                text-[9px]
-                uppercase
-                tracking-[0.32em]
-              "
-              style={{
-                color: palette.antiqueGoldDark,
-              }}
-            >
-              Invitación
-            </p>
-
-            <h2
-              className="
-                mt-2
-                font-serif
-                text-2xl
-              "
-            >
-              Salvador & Angélica
-            </h2>
-          </div>
-
-          {/* FOTO REAL DE PORTADA */}
+          {/* IMAGEN */}
 
           <div
             className="
-              w-full
-              max-w-[430px]
+              mt-8
               overflow-hidden
               border
               bg-white
               p-2
-              shadow-[0_25px_60px_rgba(16,42,82,0.14)]
-              sm:p-3
-              lg:sticky
-              lg:top-8
             "
             style={{
-              borderColor: "rgba(24,78,166,0.3)",
+              borderColor:
+                "rgba(24,78,166,0.28)",
             }}
           >
             <img
               src="/portada.JPG"
-              alt="Portada de la invitación de Salvador y Angélica"
+              alt="Salvador y Angélica"
               className="
                 block
                 h-auto
@@ -655,81 +946,124 @@ Salvador & Angélica 🤍`;
               "
             />
           </div>
+        </section>
 
-          {/* =========================================
-              PREVIEW WHATSAPP
-          ========================================= */}
+        {/* RESULTADOS */}
 
-          {link && (
+        <div>
+          {!hayResultados && (
+            <section
+              className="
+                flex
+                min-h-[420px]
+                items-center
+                justify-center
+                border
+                px-6
+                text-center
+              "
+              style={{
+                backgroundColor:
+                  "rgba(217,235,248,0.25)",
+
+                borderColor:
+                  "rgba(24,78,166,0.23)",
+              }}
+            >
+              <div>
+                <p
+                  className="
+                    text-[9px]
+                    uppercase
+                    tracking-[0.35em]
+                  "
+                  style={{
+                    color:
+                      palette.royal,
+                  }}
+                >
+                  Enlaces personalizados
+                </p>
+
+                <h2 className="mt-4 font-serif text-3xl">
+                  Agrega los datos del invitado
+                </h2>
+
+                <p
+                  className="
+                    mx-auto
+                    mt-4
+                    max-w-md
+                    text-sm
+                    leading-6
+                  "
+                  style={{
+                    color:
+                      palette.warmGray,
+                  }}
+                >
+                  Aquí aparecerán la invitación
+                  original y la reconfirmación.
+                </p>
+              </div>
+            </section>
+          )}
+
+          {hayResultados && (
             <div
               className="
-                mt-10
-                w-full
-                max-w-[430px]
+                grid
+                gap-7
+
+                xl:grid-cols-2
               "
             >
-              <p
-                className="
-                  mb-3
-                  text-center
-                  text-[9px]
-                  uppercase
-                  tracking-[0.3em]
-                "
-                style={{
-                  color: palette.antiqueGoldDark,
-                }}
-              >
-                Vista previa del mensaje
-              </p>
+              <ResultadoEnlace
+                titulo="Invitación original"
+                descripcion="Este enlace muestra la invitación completa."
+                link={
+                  linkInvitacion
+                }
+                mensaje={
+                  mensajeInvitacion
+                }
+                setMensaje={
+                  setMensajeInvitacion
+                }
+                tipo="invitacion"
+                copiado={copiado}
+                copiarLink={
+                  copiarLink
+                }
+                copiarMensaje={
+                  copiarMensaje
+                }
+              />
 
-              <div
-                className="
-                  rounded-2xl
-                  bg-[#EAF4FB]
-                  p-4
-                  shadow-[0_15px_40px_rgba(16,42,82,0.08)]
-                "
-              >
-                <div
-                  className="
-                    ml-auto
-                    max-w-[90%]
-                    rounded-xl
-                    rounded-tr-sm
-                    bg-[#D9FDD3]
-                    px-4
-                    py-3
-                    shadow-sm
-                  "
-                >
-                  <p
-                    className="
-                      whitespace-pre-wrap
-                      break-words
-                      text-[13px]
-                      leading-5
-                      text-[#102A52]
-                    "
-                  >
-                    {mensaje}
-                  </p>
-
-                  <p
-                    className="
-                      mt-1
-                      text-right
-                      text-[9px]
-                      text-black/40
-                    "
-                  >
-                    12:00 ✓✓
-                  </p>
-                </div>
-              </div>
+              <ResultadoEnlace
+                titulo="Reconfirmación"
+                descripcion="Este enlace muestra solamente la portada y el formulario de reconfirmación."
+                link={
+                  linkReconfirmacion
+                }
+                mensaje={
+                  mensajeReconfirmacion
+                }
+                setMensaje={
+                  setMensajeReconfirmacion
+                }
+                tipo="reconfirmacion"
+                copiado={copiado}
+                copiarLink={
+                  copiarLink
+                }
+                copiarMensaje={
+                  copiarMensaje
+                }
+              />
             </div>
           )}
-        </section>
+        </div>
       </div>
     </main>
   );
