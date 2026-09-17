@@ -452,7 +452,7 @@ export default function Confirmacion({
         "Reconfirmación de asistencia",
 
       descripcion:
-        "Por favor, reconfirma tu asistencia antes del 3 de octubre.",
+        "Por favor, reconfirma tu asistencia antes del 27 de Septiembre.",
 
       botonNovio:
         "Reconfirmar con Salvador",
